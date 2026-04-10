@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: japan-trip-2026
+    runtime: static
+    staticPublishPath: .
+    pullRequestPreviewsEnabled: false
