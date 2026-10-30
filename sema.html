@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEMA — November 3–5, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/trip.css">
+<style>
+/* ═══ SEMA LOOK: the Strip at night — neon, chrome, checkered flags ═══ */
+:root {
+    --font-body: 'Barlow', sans-serif;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-cond: 'Barlow Condensed', sans-serif;
+    --ink: #F1ECE4;
+    --paper: #121218;
+    --panel-bg: #1A1A22;
+    --accent: #FF3D8B;
+    --accent2: #2FD6E8;
+    --gold: #F4B740;
+    --tint: #3A1730;
+    --tint-mid: #FF3D8B;
+    --stone: #A29D96;
+    --mist: #34343F;
+    --slate: #C9C4BC;
+    --hero-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Crect width='14' height='14' fill='%23F1ECE4' opacity='0.05'/%3E%3Crect x='14' y='14' width='14' height='14' fill='%23F1ECE4' opacity='0.05'/%3E%3C/svg%3E");
+    --hero-pattern-size: 28px 28px;
+    --checker: repeating-conic-gradient(var(--ink) 0 25%, transparent 0 50%);
+}
+.hero {
+    background:
+        radial-gradient(ellipse at 50% 100%, rgba(255,61,139,0.25), transparent 60%),
+        linear-gradient(#0A0A11, #141225 60%, #251335);
+}
+.hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0 0 45% 0;
+    background-image:
+        radial-gradient(1.5px 1.5px at 12% 18%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 27% 32%, #fff 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 41% 9%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 58% 24%, #fff 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 73% 14%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 86% 36%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 93% 8%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 5% 44%, #fff 50%, transparent 51%);
+    opacity: 0.55;
+}
+.particle {
+    animation-name: rise;
+    border-radius: 50%;
+    background: var(--accent2);
+    box-shadow: 0 0 6px 2px rgba(47,214,232,0.6);
+}
+.particle:nth-child(3n) { background: var(--accent); box-shadow: 0 0 6px 2px rgba(255,61,139,0.6); }
+.particle:nth-child(4n) { background: var(--gold); box-shadow: 0 0 6px 2px rgba(244,183,64,0.55); }
+.trips-link { color: var(--accent2); font-family: var(--font-cond); font-size: 0.75rem; }
+.hero-kicker {
+    font-family: var(--font-cond);
+    font-size: 0.85rem;
+    letter-spacing: 0.4em;
+    color: var(--accent2);
+    text-shadow: 0 0 10px rgba(47,214,232,0.55);
+}
+.hero-title {
+    font-size: clamp(6rem, 22vw, 11rem);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: #FFF4F8;
+    text-shadow: 0 0 6px var(--accent), 0 0 18px var(--accent), 0 0 42px rgba(255,61,139,0.55);
+    animation: flicker 2.4s linear 0.4s 1 both;
+}
+@keyframes flicker {
+    0%, 6%, 10%, 14% { opacity: 1; }
+    4%, 8%, 12% { opacity: 0.35; }
+    15%, 100% { opacity: 1; }
+}
+.hero-date { font-family: var(--font-cond); font-size: 1rem; letter-spacing: 0.25em; color: var(--gold); }
+.hero-names { color: var(--stone); }
+.hero-rule { width: 140px; height: 10px; background: var(--checker) 0 0 / 10px 10px; opacity: 0.85; }
+.hero-scroll { font-family: var(--font-cond); color: var(--accent2); letter-spacing: 0.25em; }
+
+.facts {
+    background: #17171E;
+    border-top: none;
+    box-shadow: inset 0 3px 0 var(--accent), inset 0 6px 0 #17171E, inset 0 8px 0 var(--accent2);
+    padding-top: 1.6rem;
+}
+.fact-label { font-family: var(--font-cond); font-size: 0.72rem; color: var(--accent2); letter-spacing: 0.14em; }
+.main-nav { background: rgba(18,18,24,0.92); }
+.tab-num { font-family: var(--font-display); font-size: 1.15rem; font-weight: 400; letter-spacing: 0.05em; }
+.tab-label, .tab-text { font-family: var(--font-cond); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.tab.active { text-shadow: 0 0 10px rgba(255,61,139,0.7); box-shadow: 0 2px 12px -4px var(--accent); }
+
+.panel-num {
+    font-size: 4.4rem;
+    font-weight: 400;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--accent);
+    text-shadow: 0 0 18px rgba(255,61,139,0.35);
+}
+.panel-title { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; letter-spacing: 0.04em; line-height: 1.05; }
+.panel-date { font-family: var(--font-cond); font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.panel-mark {
+    font-style: normal;
+    font-size: 3rem;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--stone);
+    opacity: 0.45;
+    letter-spacing: 0.06em;
+}
+.panel-divider { height: 6px; background: var(--checker) 0 0 / 6px 6px; opacity: 0.22; }
+.panel-cover { font-family: var(--font-cond); font-size: 0.82rem; letter-spacing: 0.03em; border-top-color: #3A3A46; }
+.panel-cover b { color: var(--accent2); }
+
+.stop:hover { background: #1D1D26; }
+.stop-time {
+    font-family: var(--font-cond);
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+    min-width: 70px;
+}
+.stop-name { font-size: 0.92rem; }
+.stop-notes { font-size: 0.8rem; }
+.tag {
+    font-family: var(--font-cond);
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    color: #121218;
+    background: var(--tag-color);
+    padding: 0 8px;
+    border-radius: 0;
+    transform: skewX(-12deg);
+}
+.t-flight { --tag-color: #2FD6E8; }
+.t-move   { --tag-color: #7FE3EF; }
+.t-hotel  { --tag-color: #F4B740; }
+.t-eat    { --tag-color: #8BD17C; }
+.t-meet   { --tag-color: #C59BFF; }
+.t-trim   { --tag-color: #F08A4B; }
+.t-cam    { --tag-color: #6FA8FF; }
+.t-steps  { --tag-color: #FFD84D; }
+.t-wheels { --tag-color: #D9D4CC; }
+.t-sound  { --tag-color: #FF6FB1; }
+.t-show   { --tag-color: #FF3D8B; }
+.t-opt    { --tag-color: #8C8A86; }
+.booth {
+    font-family: var(--font-cond);
+    font-weight: 700;
+    font-size: 0.78em;
+    letter-spacing: 0.05em;
+    color: #121218;
+    background: var(--ink);
+    padding: 0 5px;
+    border-radius: 2px;
+    box-shadow: inset 0 0 0 1px #121218, 0 0 0 1px var(--stone);
+    white-space: nowrap;
+}
+.stop-alert { background: rgba(255,61,139,0.1); }
+.fun-fact {
+    position: relative;
+    background: #1D1B26;
+    border-left: none;
+    padding-left: 1rem;
+    border-radius: 0 3px 3px 0;
+}
+.fun-fact::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 6px;
+    background: repeating-conic-gradient(var(--ink) 0 25%, #121218 0 50%) 0 0 / 6px 6px;
+    opacity: 0.7;
+}
+.map-pin { opacity: 0.75; }
+
+.ref-title { font-size: 2.4rem; letter-spacing: 0.04em; }
+.ref-rule { height: 6px; background: var(--checker) 0 0 / 6px 6px; opacity: 0.22; }
+.sub-title { font-family: var(--font-cond); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.14em; color: var(--accent2); }
+.checklist input[type="checkbox"] { accent-color: var(--accent); }
+.tip { border-left-color: var(--accent2); }
+.costs-table th { font-family: var(--font-cond); font-size: 0.78rem; letter-spacing: 0.1em; }
+.footer { border-top: none; position: relative; padding-top: 3rem; }
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 12px;
+    background: var(--checker) 0 0 / 12px 12px;
+    opacity: 0.2;
+}
+.footer-mark {
+    font-style: normal;
+    font-size: 2rem;
+    letter-spacing: 0.1em;
+    color: #FFF4F8;
+    opacity: 0.9;
+    text-shadow: 0 0 6px var(--accent), 0 0 16px var(--accent);
+}
+.footer-trips a { font-family: var(--font-cond); font-size: 0.8rem; color: var(--accent2); }
+@media (prefers-reduced-motion: reduce) { .hero-title { animation: none; } }
+</style>
+</head>
+<body data-store="sema26_">
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+    <div class="hero-bg">
+        <svg class="hero-art" viewBox="0 0 1400 420" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+            <defs>
+                <linearGradient id="cityGlow" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#FF3D8B" stop-opacity="0"/>
+                    <stop offset="100%" stop-color="#FF3D8B" stop-opacity="0.3"/>
+                </linearGradient>
+                <linearGradient id="tower" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#2C2A3A"/>
+                    <stop offset="100%" stop-color="#15141C"/>
+                </linearGradient>
+                <pattern id="winGold" width="12" height="14" patternUnits="userSpaceOnUse">
+                    <rect x="4" y="4" width="3" height="5" fill="#F4B740" opacity="0.6"/>
+                </pattern>
+                <pattern id="winCyan" width="10" height="12" patternUnits="userSpaceOnUse">
+                    <rect x="3" y="3" width="2" height="4" fill="#2FD6E8" opacity="0.5"/>
+                </pattern>
+                <filter id="neon" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="2.5" result="blur"/>
+                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+            </defs>
+            <rect y="190" width="1400" height="230" fill="url(#cityGlow)"/>
+            <!-- Spring Mountains behind the Strip -->
+            <path d="M0 300 L80 268 L150 280 L240 222 L320 262 L410 210 L500 252 L590 232 L680 270 L770 236 L870 280 L960 242 L1060 276 L1160 230 L1270 268 L1400 246 L1400 420 L0 420Z" fill="#2B1D3A" opacity="0.9"/>
+            <!-- skyline -->
+            <g fill="url(#tower)">
+                <rect x="120" y="330" width="55" height="90"/>
+                <rect x="180" y="285" width="38" height="135"/>
+                <rect x="223" y="315" width="62" height="105"/>
+                <rect x="360" y="270" width="70" height="150"/>
+                <rect x="435" y="310" width="48" height="110"/>
+                <path d="M490 420 L490 250 Q530 226 572 234 L572 420Z"/>
+                <rect x="578" y="292" width="46" height="128"/>
+                <rect x="630" y="260" width="58" height="160"/>
+                <path d="M700 420 L700 92 Q712 56 772 44 L772 420Z"/>
+                <rect x="780" y="280" width="52" height="140"/>
+                <rect x="838" y="245" width="75" height="175"/>
+                <rect x="918" y="315" width="40" height="105"/>
+                <path d="M963 420 L963 215 L996 190 L1029 215 L1029 420Z"/>
+                <rect x="1034" y="295" width="50" height="125"/>
+                <rect x="1090" y="325" width="36" height="95"/>
+                <rect x="1345" y="340" width="55" height="80"/>
+            </g>
+            <!-- the STRAT -->
+            <rect x="318" y="150" width="12" height="270" fill="#1C1B25"/>
+            <ellipse cx="324" cy="165" rx="26" ry="10" fill="#24222F"/>
+            <ellipse cx="324" cy="179" rx="18" ry="7" fill="#24222F"/>
+            <rect x="322" y="96" width="4" height="60" fill="#1C1B25"/>
+            <circle cx="324" cy="95" r="2.5" fill="#FF3D8B" filter="url(#neon)"/>
+            <!-- lit windows -->
+            <rect x="360" y="278" width="70" height="142" fill="url(#winGold)"/>
+            <rect x="630" y="268" width="58" height="152" fill="url(#winCyan)"/>
+            <rect x="708" y="100" width="58" height="320" fill="url(#winGold)" opacity="0.8"/>
+            <rect x="838" y="252" width="75" height="168" fill="url(#winCyan)"/>
+            <rect x="963" y="222" width="66" height="198" fill="url(#winGold)" opacity="0.7"/>
+            <!-- neon edges -->
+            <path d="M700 92 Q712 56 772 44" stroke="#FF3D8B" stroke-width="2.5" fill="none" filter="url(#neon)"/>
+            <line x1="700" y1="92" x2="700" y2="420" stroke="#FF3D8B" stroke-width="1.2" opacity="0.6" filter="url(#neon)"/>
+            <path d="M490 250 Q530 226 572 234" stroke="#F4B740" stroke-width="1.8" fill="none" filter="url(#neon)"/>
+            <rect x="636" y="246" width="46" height="9" stroke="#FF3D8B" stroke-width="1.5" fill="none" filter="url(#neon)"/>
+            <path d="M963 215 L996 190 L1029 215" stroke="#2FD6E8" stroke-width="1.8" fill="none" filter="url(#neon)"/>
+            <!-- LVCC West Hall -->
+            <path d="M1135 420 L1135 380 L1340 366 L1340 420Z" fill="#1D1C26"/>
+            <path d="M1135 380 L1340 366" stroke="#2FD6E8" stroke-width="2" filter="url(#neon)"/>
+            <!-- the Boulevard -->
+            <rect y="412" width="1400" height="8" fill="#0D0D13"/>
+            <line x1="0" y1="416" x2="1400" y2="416" stroke="#F4B740" stroke-width="1.5" stroke-dasharray="18 14" opacity="0.5"/>
+        </svg>
+        <div id="particles" data-kind="rise" data-count="18"></div>
+    </div>
+    <a class="trips-link" href="index.html">← ALL TRIPS</a>
+    <div class="hero-content">
+        <div class="hero-kicker">LAS VEGAS · LVCC</div>
+        <h1 class="hero-title">SEMA</h1>
+        <div class="hero-date">NOVEMBER 3 – 5, 2026</div>
+        <div class="hero-names">Bradley Albright</div>
+        <div class="hero-rule"></div>
+        <p class="hero-desc">Three days on the Las Vegas Convention Center floor hunting interior trim, cameras, side steps, wheels and sound. Dinner at Papi Steak with XPEL, lunch with James from London, and a 5:15 AM getaway to Costa Rica at the end.</p>
+        <a href="#main" class="hero-scroll">▼ EXPLORE THE SHOW PLAN</a>
+    </div>
+</section>
+
+<!-- ═══ FACTS BAR ═══ -->
+<div class="facts" id="main">
+    <div class="facts-inner">
+        <div class="fact">
+            <span class="fact-label">FLIGHT</span>
+            <div class="fact-val"><b>UA 1631</b> EWR→LAS Tue Nov 3<br>9:11 AM → 12:04 PM · Conf: <b>K0D4JY</b></div>
+        </div>
+        <div class="fact">
+            <span class="fact-label">HOTEL</span>
+            <div class="fact-val"><b>Fontainebleau Las Vegas</b><br>Nov 3–6 · $722.96 on file (work expense)</div>
+        </div>
+        <div class="fact">
+            <span class="fact-label">SHOW</span>
+            <div class="fact-val">Registration ID <b>290817</b><br>LVCC · 9 AM–5 PM Tue, Wed, Thu</div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav class="main-nav">
+    <div class="nav-inner">
+        <button class="tab" data-panel="day-1"><span class="tab-num">01</span><span class="tab-label">Tue · West</span></button>
+        <button class="tab" data-panel="day-2"><span class="tab-num">02</span><span class="tab-label">Wed · North</span></button>
+        <button class="tab" data-panel="day-3"><span class="tab-num">03</span><span class="tab-label">Thu · Lots</span></button>
+        <div class="nav-sep"></div>
+        <button class="tab" data-panel="vendors"><span class="tab-text">◎ Vendors</span></button>
+        <button class="tab" data-panel="actions"><span class="tab-text">☑ Actions</span></button>
+        <button class="tab" data-panel="costs"><span class="tab-text">$ Costs</span></button>
+        <button class="tab" data-panel="tips"><span class="tab-text">→ Getting Around</span></button>
+        <button class="tab" data-panel="packing"><span class="tab-text">🎒 Pack</span></button>
+        <button class="tab" data-panel="emergency"><span class="tab-text">🚨 Emergency</span></button>
+    </div>
+</nav>
+
+<!-- ═══ PANELS ═══ -->
+<div class="panels">
+
+    <!-- DAY 1 -->
+    <div class="panel" id="day-1">
+        <div class="panel-header">
+            <div class="panel-num">01</div>
+            <div class="panel-meta">
+                <h2 class="panel-title">Arrive + West Hall</h2>
+                <div class="panel-date">Tuesday, November 3</div>
+            </div>
+            <div class="panel-mark">WEST</div>
+        </div>
+        <p class="panel-narrative">Morning flight from Newark, check in at the Fontainebleau, then a tight three-hour pass of West Hall. Hard stop at 6:30 PM for dinner with XPEL.</p>
+        <div class="panel-divider"></div>
+        <div class="stops"><div class="stop">
+            <div class="stop-time">9:11 AM</div>
+            <div class="stop-body">
+                <div class="stop-name">UA 1631: Newark (EWR) → Las Vegas (LAS) <span class="tag t-flight">FLIGHT</span> <a href="https://maps.apple.com/?ll=40.6956,-74.1777&q=Newark+Liberty+International+Airport+Terminal+C" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
+                <div class="stop-notes">Confirmation K0D4JY. Lands 12:04 PM Pacific — Las Vegas is 3 hours behind New York. This is the changed SEMA flight: original fare $677.52, changed with $0.00 paid, which created the $388.12 United credit later applied to the Costa Rica ticket. <b>Pack your passport in your carry-on</b> — you need it Friday for Costa Rica.</div>
+                <div class="fun-fact"><span class="fun-fact-icon">🏁</span> <span class="fun-fact-text">Newark opened in 1928 as the New York area's first major airport, and in the early 1930s it was among the busiest airports in the world.</span></div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">12:04 PM</div>
+            <div class="stop-body">
+                <div class="stop-name">Land at Harry Reid International (LAS) <span class="tag t-move">TRANSIT</span> <a href="https://maps.apple.com/?ll=36.0840,-115.1537&q=Harry+Reid+International+Airport" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
+                <div class="stop-notes">Taxi or rideshare up the Strip to the Fontainebleau at the north end (2777 S Las Vegas Blvd), roughly 15–20 min.</div>
+                <div class="fun-fact"><span class="fun-fact-icon">🏁</span> <span class="fun-fact-text">The airport was McCarran International until December 2021, when it was renamed for Senator Harry Reid. Slot machines sit right at the gates — the first and last chance to gamble in Nevada.</span></div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">12:45 PM</div>
+            <div class="stop-body">
+                <div class="stop-name">Check in: Fontainebleau Las Vegas <span class="tag t-hotel">HOTEL</span> <a href="https://maps.apple.com/?ll=36.1360,-115.1593&q=Fontainebleau+Las+Vegas" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
+                <div class="stop-notes">$722.96 on file (work expense). If the room isn't ready yet, leave bags with the bell desk — West Hall is a short walk away.</div>
+                <div class="fun-fact"><span class="fun-fact-icon">🏁</span> <span class="fun-fact-text">Construction stalled in 2009 and the tower stood unfinished on the Strip for over a decade before it finally opened in December 2023. At 737 ft it is the tallest occupied building in Nevada.</span></div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">1:30 PM</div>
+            <div class="stop-body">
+                <div class="stop-name">Walk to West Hall <span class="tag t-move">TRANSIT</span> <a href="https://maps.apple.com/?ll=36.1330,-115.1570&q=LVCC+West+Hall" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
+                <div class="stop-notes">SEMA registration ID 290817 ($399, work expense) — have it ready if you still need to collect a badge. On the walk over, open the SEMA app and look up XPEL's booth number; it isn't published anywhere for 2026.</div>
+                <div class="fun-fact"><span class="fun-fact-icon">🏁</span> <span class="fun-fact-text">The first SEMA Show was held in 1967 under the grandstands at Dodger Stadium. It has called Las Vegas home since the late 1970s, and West Hall — opened in 2021 — added 1.4 million sq ft to the convention center.</span></div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">2:00 PM</div>
+            <div class="stop-body">
+                <div class="stop-name">XPEL <span class="booth">BOOTH # IN APP</span> <span class="tag t-meet">MEET</span> <a href="https://maps.apple.com/?ll=36.1330,-115.1570&q=LVCC+West+Hall" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
+                <div class="stop-notes">West Hall, Restyling &amp; Car Care. Booth number not published for 2026 — the #52065 in circulation is from XPEL's October 2024 release. A quick hello ahead of tonight's dinner; save the deep conversation for the table.</div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">2:30 PM</div>
+            <div class="stop-body">
+                <div class="stop-name">Katzkin + Alea <span class="booth">BOOTH # IN APP</span> <span class="tag t-trim">INTERIOR TRIM</span></div>
+                <div class="stop-notes">Restyling section; neither booth number is published for 2026. Interior trim starts here: compare the two leather programs side by side.</div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">3:15 PM</div>
+            <div class="stop-body">
+                <div class="stop-name">PRO Cup Challenge <span class="booth">#50237</span> <span class="tag t-show">SHOW</span></div>
+                <div class="stop-notes">The six restyler builds, with Alea and Katzkin products in them. People's Choice voting is open (closes Wednesday 2 PM).</div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">3:45 PM</div>
+            <div class="stop-body">
+                <div class="stop-name">WeatherTech <span class="booth">#55087</span> + Westin <span class="booth">#55051</span> <span class="tag t-steps">SIDE STEPS</span></div>
+                <div class="stop-notes">Both in the 55000 block, near Ford #55033. Westin opens the side steps category.</div>
+                <div class="fun-fact"><span class="fun-fact-icon">🏁</span> <span class="fun-fact-text">WeatherTech makes its FloorLiners in Bolingbrook, Illinois — "made in America" has been the centrepiece of its Super Bowl ads.</span></div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">4:30 PM</div>
+            <div class="stop-body">
+                <div class="stop-name">Black Horse Off Road <span class="booth">#57185</span> <span class="tag t-steps">SIDE STEPS</span> <span class="tag t-trim">INTERIOR TRIM</span></div>
+                <div class="stop-notes">Power running boards on their 2026 Ram build. Bonus: the build's interior is Katzkin leather — a second, in-vehicle look at Katzkin's work.</div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">5:00 PM</div>
+            <div class="stop-body">
+                <div class="stop-name">Halls close <span class="tag t-opt">OPTION</span></div>
+                <div class="stop-notes">Back to the Fontainebleau. The PRO Reception runs 5–7 PM on West Hall's 3rd floor if you want a drink first.</div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">6:30 PM</div>
+            <div class="stop-body">
+                <div class="stop-name">Dinner: Papi Steak, Fontainebleau — with XPEL <span class="tag t-eat">EAT</span> <span class="tag t-meet">MEET</span> <a href="https://maps.apple.com/?ll=36.1360,-115.1593&q=Papi+Steak+Fontainebleau+Las+Vegas" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
+                <div class="stop-notes">Reservation with XPEL. This is the hard stop the afternoon plan is built around.</div>
+            </div>
+        </div></div>
+        <p class="panel-cover"><b>Tuesday covers:</b> XPEL ✓ · Katzkin ✓ · Alea ✓ · WeatherTech ✓ · Interior trim (started) · Side steps (started)</p>
+    </div>
+
+    <!-- DAY 2 -->
+    <div class="panel" id="day-2">
+        <div class="panel-header">
+            <div class="panel-num">02</div>
+            <div class="panel-meta">
+                <h2 class="panel-title">North Hall + Central Hall</h2>
+                <div class="panel-date">Wednesday, November 4</div>
+            </div>
+            <div class="panel-mark">NORTH</div>
+        </div>
+        <p class="panel-narrative">Sound and cameras in North Hall all morning, lunch with James from London, then interior trim and the OEM side of cameras in Central Hall.</p>
+        <div class="panel-divider"></div>
+        <div class="stops"><div class="stop">
+            <div class="stop-time">8:40 AM</div>
+            <div class="stop-body">
+                <div class="stop-name">Fontainebleau → North Hall <span class="tag t-move">TRANSIT</span> <a href="https://maps.apple.com/?ll=36.1345,-115.1525&q=LVCC+North+Hall" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
+                <div class="stop-notes">Walk to West Hall, then cross to North Hall on the Skywalk / Paradise Bridge.</div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">9:00 AM</div>
+            <div class="stop-body">
+                <div class="stop-name">North Hall: sound sweep <span class="tag t-sound">SOUND</span></div>
+                <div class="stop-notes">All four sit in the 10300–10700 rows, so take them in booth order and never double back: Alpine <span class="booth">#10373</span> → Metra <span class="booth">#10439</span> → Rockford Fosgate <span class="booth">#10509</span> → Stinger <span class="booth">#10673</span>.</div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">10:45 AM</div>
+            <div class="stop-body">
+                <div class="stop-name">North Hall: cameras <span class="tag t-cam">CAMERAS</span></div>
+                <div class="stop-notes">Rydeen <span class="booth">#10109</span> first — the headline camera stop: its TOMBO 360° surround-view mirror systems debut here. Then Uniden <span class="booth">#10309</span> and Thinkware <span class="booth">#10829</span>, then out for lunch.</div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">11:30 AM</div>
+            <div class="stop-body">
+                <div class="stop-name">Lunch with James <span class="tag t-eat">EAT</span> <span class="tag t-meet">MEET</span></div>
+                <div class="stop-notes">James, a coworker from London, arrives at 11:00 AM. Lunch is blocked 11:30 AM–1:00 PM.</div>
+                <div class="stop-alert">⚠ Venue still to be decided — somewhere near the convention center.</div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">1:00 PM</div>
+            <div class="stop-body">
+                <div class="stop-name">Central Hall: interior trim block <span class="tag t-trim">INTERIOR TRIM</span> <a href="https://maps.apple.com/?ll=36.1316,-115.1517&q=Las+Vegas+Convention+Center+Central+Hall" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
+                <div class="stop-notes">Dynamat <span class="booth">#22689</span> (Hot Rod Alley) → HushMat <span class="booth">#23095</span> → TMI Products <span class="booth">#24477</span>. Together with Tuesday's Katzkin and Alea, this finishes interior trim.</div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">2:30 PM</div>
+            <div class="stop-body">
+                <div class="stop-name">Gentex <span class="booth">#23889</span> <span class="tag t-cam">CAMERAS</span></div>
+                <div class="stop-notes">The camera-based Full Display Mirror — the OEM-grade half of the cameras category, to set against Rydeen.</div>
+                <div class="fun-fact"><span class="fun-fact-icon">🏁</span> <span class="fun-fact-text">Gentex, from Zeeland, Michigan, brought the first commercially successful auto-dimming rear-view mirror to market in the 1980s.</span></div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">3:15 PM</div>
+            <div class="stop-body">
+                <div class="stop-name">Mickey Thompson <span class="booth">#22453</span> <span class="tag t-wheels">WHEELS</span></div>
+                <div class="stop-notes">Indoor wheels-and-tires preview of Thursday's lot pass. Also the day's buffer.</div>
+                <div class="fun-fact"><span class="fun-fact-icon">🏁</span> <span class="fun-fact-text">Mickey Thompson was a land-speed racer before he was a tire brand — in 1960 he became the first American to top 400 mph, at Bonneville.</span></div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">4:00 PM</div>
+            <div class="stop-body">
+                <div class="stop-name">Flex / revisits <span class="tag t-opt">OPTION</span> <a href="https://maps.apple.com/?ll=36.1316,-115.1517&q=Vegas+Loop+Central+Station" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
+                <div class="stop-notes">Option: Vegas Loop to West Hall for the PRO Happy Hour and Cup winner announcement (4–5 PM, PRO booth <span class="booth">#50237</span>). Or second conversations back in North Hall via the skywalk.</div>
+                <div class="fun-fact"><span class="fun-fact-icon">🏁</span> <span class="fun-fact-text">The Vegas Loop runs Teslas through tunnels dug by The Boring Company. The convention-center section opened in 2021 and turns a 25-minute walk between halls into about two minutes.</span></div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">Evening</div>
+            <div class="stop-body">
+                <div class="stop-name">Early night <span class="tag t-opt">REST</span></div>
+                <div class="stop-notes">Friday's flight leaves at 5:15 AM — Thursday night is pack-and-alarm night, so bank sleep now.</div>
+            </div>
+        </div></div>
+        <p class="panel-cover"><b>Wednesday covers:</b> Sound ✓ · Cameras ✓ · Dynamat ✓ · Interior trim (finished)</p>
+    </div>
+
+    <!-- DAY 3 -->
+    <div class="panel" id="day-3">
+        <div class="panel-header">
+            <div class="panel-num">03</div>
+            <div class="panel-meta">
+                <h2 class="panel-title">Outdoor Lots + South Hall + Mop-up</h2>
+                <div class="panel-date">Thursday, November 5</div>
+            </div>
+            <div class="panel-mark">LOTS</div>
+        </div>
+        <p class="panel-narrative">No fixed commitments. Wheels in the outdoor lots before the heat and crowds, side steps in the Diamond Lot, then an afternoon for stragglers and second conversations.</p>
+        <div class="panel-divider"></div>
+        <div class="stops"><div class="stop">
+            <div class="stop-time">9:00 AM</div>
+            <div class="stop-body">
+                <div class="stop-name">Silver Lot: wheels <span class="tag t-wheels">WHEELS</span> <a href="https://maps.apple.com/?ll=36.1290,-115.1495&q=LVCC+Silver+Lot" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
+                <div class="stop-notes">RAYS <span class="booth">#84000</span> — the first dedicated RAYS brand display at SEMA (Volk Racing and more) — and Mickey Thompson's outdoor display <span class="booth">#80001</span>. Go early, before the heat and crowds. Silver Lot sits by the Monorail station.</div>
+                <div class="fun-fact"><span class="fun-fact-icon">🏁</span> <span class="fun-fact-text">RAYS forges its Volk Racing wheels in Japan. The six-spoke TE37, launched in 1996, is one of the most imitated wheel designs ever made.</span></div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">10:30 AM</div>
+            <div class="stop-body">
+                <div class="stop-name">South Hall Lower: wheels finish + showcase <span class="tag t-wheels">WHEELS</span> <a href="https://maps.apple.com/?ll=36.1280,-115.1525&q=LVCC+South+Hall" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
+                <div class="stop-notes">Hurong Wheels <span class="booth">#47143</span> (forged manufacturer), a sweep of the Global Tire Expo, and a fast pass through the New Products Showcase <span class="booth">#41271</span>.</div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">11:15 AM</div>
+            <div class="stop-body">
+                <div class="stop-name">Diamond Lot: RealTruck <span class="booth">#W140</span> <span class="tag t-steps">SIDE STEPS</span> <a href="https://maps.apple.com/?ll=36.1335,-115.1555&q=LVCC+Diamond+Lot" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
+                <div class="stop-notes">Beside West Hall. AMP Research power steps, Go Rhino and N-FAB. This closes out side steps — Westin, Black Horse and RealTruck all seen. The HorsePower Rodeo runs in the same lot.</div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">12:00 PM</div>
+            <div class="stop-body">
+                <div class="stop-name">Lunch / buffer <span class="tag t-eat">EAT</span></div>
+                <div class="stop-notes">An hour of slack before the mop-up block.</div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">1:00 PM</div>
+            <div class="stop-body">
+                <div class="stop-name">Mop-up: the three unconfirmed names <span class="tag t-opt">APP CHECK</span></div>
+                <div class="stop-notes">Windshield Defense (Racing Optics), MAXTRAX and NSV — no 2026 listing in any source checked. Search all three in the SEMA app; don't burn floor time hunting blind.</div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">1–5 PM</div>
+            <div class="stop-body">
+                <div class="stop-name">Alea leather at Mopar <span class="booth">#59119</span> <span class="tag t-trim">INTERIOR TRIM</span> <a href="https://maps.apple.com/?ll=36.1330,-115.1570&q=LVCC+West+Hall" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
+                <div class="stop-notes">West Hall. See Alea leather installed in the Mopar Rumble Bee builds — the best view of Alea's product at the show if their own booth stays elusive. Second visits to Katzkin and XPEL as needed.</div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">1–5 PM</div>
+            <div class="stop-body">
+                <div class="stop-name">Follow-ups <span class="tag t-meet">MEET</span></div>
+                <div class="stop-notes">Pricing conversations and card exchanges carried over from Tuesday and Wednesday.</div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">3:00 PM</div>
+            <div class="stop-body">
+                <div class="stop-name">PRO seminar: "Personalization Drives the Market" <span class="tag t-opt">OPTION</span> <a href="https://maps.apple.com/?ll=36.1345,-115.1525&q=LVCC+North+Hall" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
+                <div class="stop-notes">3:00–4:00 PM, North Hall.</div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">6:00 PM</div>
+            <div class="stop-body">
+                <div class="stop-name">SEMA Industry Honors <span class="tag t-opt">OPTION</span> <a href="https://maps.apple.com/?ll=36.1360,-115.1593&q=BleauLive+Theater+Fontainebleau+Las+Vegas" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
+                <div class="stop-notes">At the Fontainebleau — BleauLive Theater, reception from 6 PM, ticketed. You're staying there anyway.</div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">Night</div>
+            <div class="stop-body">
+                <div class="stop-name">Pack for Costa Rica + set the alarm <span class="tag t-hotel">HOTEL</span></div>
+                <div class="stop-notes">UA 361 leaves LAS at 5:15 AM Friday — be at the airport by about 3:45 AM. Passport in the carry-on, Costa Rica clothes on top.</div>
+                <div class="stop-alert">The trip carries on from here: <a href="costa-rica.html">Costa Rica itinerary →</a></div>
+            </div>
+        </div></div>
+        <p class="panel-cover"><b>Thursday covers:</b> Wheels ✓ · Side steps (finished) · Windshield Defense / MAXTRAX / NSV (app check only)</p>
+    </div>
+
+    <!-- ═══ VENDORS ═══ -->
+    <div class="panel" id="vendors">
+        <div class="ref-section">
+            <h2 class="ref-title">Vendor Checklist</h2>
+            <div class="ref-rule"></div>
+            <div class="sub-title">NAMED VENDORS</div>
+            <ul class="checklist">
+                <li><input type="checkbox" data-key="v0"><span class="nm">XPEL</span><span class="dt">Confirmed 2026 exhibitor, West Hall Restyling &amp; Car Care. Booth # not verified — #52065 is from the Oct 2024 release. Dinner Tue 6:30 PM.</span></li>
+                <li><input type="checkbox" data-key="v1"><span class="nm">Alea (seat coverings)</span><span class="dt">Alea Leather USA, PRO Cup sponsor (#50237); own booth # not verified. Installed at Mopar #59119 (Rumble Bee builds, per Stellantis Oct 27, 2026).</span></li>
+                <li><input type="checkbox" data-key="v2"><span class="nm">Katzkin</span><span class="dt">Confirmed exhibitor, Restyling anchor; booth # not verified. In the Black Horse Ram at #57185; also a PRO Cup sponsor (#50237).</span></li>
+                <li><input type="checkbox" data-key="v3"><span class="nm">Windshield Defense</span><span class="dt">Racing Optics. No 2026 SEMA listing found in two research passes — likely not exhibiting. App check Thu.</span></li>
+                <li><input type="checkbox" data-key="v4"><span class="nm">MAXTRAX</span><span class="dt">No 2026 SEMA presence found — likely not exhibiting. App check Thu.</span></li>
+                <li><input type="checkbox" data-key="v5"><span class="nm">NSV Automotive</span><span class="dt">No 2026 SEMA listing found — likely not exhibiting. App check Thu.</span></li>
+                <li><input type="checkbox" data-key="v6"><span class="nm">WeatherTech</span><span class="dt">West Hall #55087 ✓ verified.</span></li>
+                <li><input type="checkbox" data-key="v7"><span class="nm">Dynamat</span><span class="dt">Central Hall (Hot Rod Alley) #22689 ✓ verified.</span></li>
+            </ul>
+            <div class="sub-title">TO FIND — INTERIOR TRIM</div>
+            <ul class="checklist">
+                <li><input type="checkbox" data-key="v10"><span class="nm">TMI Products</span><span class="dt">Central #24477</span></li>
+                <li><input type="checkbox" data-key="v11"><span class="nm">HushMat</span><span class="dt">Central #23095</span></li>
+                <li><input type="checkbox" data-key="v12"><span class="nm">Keyston Bros / IMPACT</span><span class="dt">IMPACT Interior Products — attending confirmed, booth unpublished.</span></li>
+            </ul>
+            <div class="sub-title">TO FIND — CAMERAS</div>
+            <ul class="checklist">
+                <li><input type="checkbox" data-key="v20"><span class="nm">Rydeen</span><span class="dt">North #10109 — TOMBO 360TX/DX 360° surround-view, debuting.</span></li>
+                <li><input type="checkbox" data-key="v21"><span class="nm">Gentex</span><span class="dt">Central #23889 — Full Display Mirror.</span></li>
+                <li><input type="checkbox" data-key="v22"><span class="nm">Thinkware</span><span class="dt">North #10829</span></li>
+                <li><input type="checkbox" data-key="v23"><span class="nm">Uniden</span><span class="dt">North #10309</span></li>
+            </ul>
+            <div class="sub-title">TO FIND — SIDE STEPS</div>
+            <ul class="checklist">
+                <li><input type="checkbox" data-key="v30"><span class="nm">Westin Automotive</span><span class="dt">West #55051</span></li>
+                <li><input type="checkbox" data-key="v31"><span class="nm">Black Horse Off Road</span><span class="dt">West #57185 — power boards.</span></li>
+                <li><input type="checkbox" data-key="v32"><span class="nm">RealTruck</span><span class="dt">Diamond Lot #W140 — AMP Research, Go Rhino, N-FAB.</span></li>
+            </ul>
+            <div class="sub-title">TO FIND — WHEELS</div>
+            <ul class="checklist">
+                <li><input type="checkbox" data-key="v40"><span class="nm">RAYS</span><span class="dt">Silver Lot #84000</span></li>
+                <li><input type="checkbox" data-key="v41"><span class="nm">Mickey Thompson</span><span class="dt">Silver Lot #80001 + Central #22453</span></li>
+                <li><input type="checkbox" data-key="v42"><span class="nm">Hurong Wheels</span><span class="dt">South Hall Lower #47143</span></li>
+            </ul>
+            <div class="sub-title">TO FIND — SOUND</div>
+            <ul class="checklist">
+                <li><input type="checkbox" data-key="v50"><span class="nm">Alpine</span><span class="dt">North #10373</span></li>
+                <li><input type="checkbox" data-key="v51"><span class="nm">Metra</span><span class="dt">North #10439</span></li>
+                <li><input type="checkbox" data-key="v52"><span class="nm">Rockford Fosgate</span><span class="dt">North #10509</span></li>
+                <li><input type="checkbox" data-key="v53"><span class="nm">Stinger</span><span class="dt">North #10673</span></li>
+            </ul>
+            <div class="sub-title">CATEGORY TRACKER</div>
+            <table class="costs-table">
+                <tr><th>Category</th><th>When</th></tr>
+                <tr><td>Interior trim</td><td>Tue (West) + Wed (Central)</td></tr>
+                <tr><td>Cameras</td><td>Wed</td></tr>
+                <tr><td>Side steps</td><td>Tue (West) + Thu (Diamond Lot)</td></tr>
+                <tr><td>Wheels</td><td>Wed (Central preview) + Thu (lots / South)</td></tr>
+                <tr><td>Sound</td><td>Wed (North)</td></tr>
+            </table>
+            <p class="ref-note" style="margin-top:1rem;">The official exhibitor directory (Map Your Show) couldn't be read directly. Booth numbers come from SEMA's own published 2026 schedules and exhibitor announcements, plus Trade Show Buzz (directory data as of Sep 14, 2026). The SEMA app on site is the final word.</p>
+        </div>
+    </div>
+
+    <!-- ═══ ACTIONS ═══ -->
+    <div class="panel" id="actions">
+        <div class="ref-section">
+            <h2 class="ref-title">Action Items</h2>
+            <div class="ref-rule"></div>
+            <div class="sub-title">BEFORE THE SHOW</div>
+            <ul class="checklist">
+                <li><input type="checkbox" data-key="a0"><span class="nm">Lunch venue</span><span class="dt">Wed 11:30 AM with James — still TBD. Somewhere near the convention center.</span></li>
+                <li><input type="checkbox" data-key="a1"><span class="nm">SEMA app</span><span class="dt">Install it — you need it for the XPEL, Katzkin and Alea booth numbers and the three unconfirmed names.</span></li>
+                <li><input type="checkbox" data-key="a2"><span class="nm">Passport</span><span class="dt">Carry-on, from Tuesday. Friday's flight goes straight from Las Vegas to Costa Rica.</span></li>
+                <li><input type="checkbox" data-key="a3"><span class="nm">Industry Honors</span><span class="dt">Thu evening, BleauLive Theater — ticketed. Decide if you want to go.</span></li>
+            </ul>
+            <div class="sub-title">ON SITE</div>
+            <ul class="checklist">
+                <li><input type="checkbox" data-key="a10"><span class="nm">Booth numbers</span><span class="dt">Resolve XPEL, Katzkin and Alea in the app before Tuesday afternoon.</span></li>
+                <li><input type="checkbox" data-key="a11"><span class="nm">People's Choice vote</span><span class="dt">PRO Cup Challenge, #50237 — voting closes Wed 2 PM.</span></li>
+                <li><input type="checkbox" data-key="a12"><span class="nm">App check</span><span class="dt">Thu: Windshield Defense, MAXTRAX, NSV.</span></li>
+                <li><input type="checkbox" data-key="a13"><span class="nm">Pack + alarm</span><span class="dt">Thu night. At LAS by ~3:45 AM for UA 361 at 5:15 AM.</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ═══ COSTS ═══ -->
+    <div class="panel" id="costs">
+        <div class="ref-section">
+            <h2 class="ref-title">SEMA Costs</h2>
+            <div class="ref-rule"></div>
+            <p class="ref-note">All work expense.</p>
+            <table class="costs-table">
+                <tr><th>Item</th><th>Cost</th></tr>
+                <tr><td>SEMA registration (ID 290817)</td><td>$399.00</td></tr>
+                <tr><td>Fontainebleau Las Vegas<small>On file</small></td><td>$722.96</td></tr>
+                <tr><td>UA 1631 Newark → Las Vegas<small>Original fare. The change was $0.00 and created a $388.12 United credit, later applied to the Costa Rica ticket.</small></td><td>$677.52</td></tr>
+                <tr class="total"><td>Total</td><td>$1,799.48</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- ═══ GETTING AROUND ═══ -->
+    <div class="panel" id="tips">
+        <div class="ref-section">
+            <h2 class="ref-title">Getting Around the LVCC</h2>
+            <div class="ref-rule"></div>
+            <div class="tip"><b>Show hours:</b> 9:00 AM–5:00 PM Tue, Wed, Thu.</div>
+            <div class="tip"><b>Vegas Loop</b> is free on campus and links the West, Central and South stations — about 2 min against a walk of up to 25. Use it for every West ↔ Central hop.</div>
+            <div class="tip"><b>West ↔ North:</b> the Skywalk / Paradise Bridge.</div>
+            <div class="tip"><b>North ↔ South:</b> the climate-controlled concourse.</div>
+            <div class="tip"><b>Diamond Lot</b> is beside West Hall. <b>Silver Lot</b> is by the Monorail station.</div>
+            <div class="tip"><b>Fontainebleau</b> is a short walk from West Hall.</div>
+            <div class="tip"><b>Booth-number blocks:</b> North 10000s · Central 20000s · South Lower 40000s · West 50000s · Silver Lot 80000s. Within a hall, work the numbers in order.</div>
+        </div>
+    </div>
+
+    <!-- ═══ PACKING ═══ -->
+    <div class="panel" id="packing">
+        <div class="ref-section">
+            <h2 class="ref-title">Packing List</h2>
+            <div class="ref-rule"></div>
+            <p class="ref-note">One bag does both trips: Friday you fly straight from Las Vegas to Liberia. Pack the Costa Rica list too — see the <a href="costa-rica.html#packing">Costa Rica packing list</a>.</p>
+            <div class="sub-title">SHOW DAYS</div>
+            <ul class="checklist">
+                <li><input type="checkbox" data-key="p0"><span class="nm">Broken-in shoes</span><span class="dt">Three full days on concrete floors and outdoor lots. Not new shoes.</span></li>
+                <li><input type="checkbox" data-key="p1"><span class="nm">Business cards</span><span class="dt">More than you think — card exchanges on Thursday's mop-up.</span></li>
+                <li><input type="checkbox" data-key="p2"><span class="nm">Phone + battery pack</span><span class="dt">The SEMA app, maps and photos all day.</span></li>
+                <li><input type="checkbox" data-key="p3"><span class="nm">Light layer</span><span class="dt">Halls are air-conditioned; desert evenings cool down.</span></li>
+                <li><input type="checkbox" data-key="p4"><span class="nm">Water bottle</span><span class="dt">Dry air all day.</span></li>
+                <li><input type="checkbox" data-key="p5"><span class="nm">Sunglasses + sunscreen</span><span class="dt">Silver Lot and Diamond Lot on Thursday morning.</span></li>
+                <li><input type="checkbox" data-key="p6"><span class="nm">Dinner outfit</span><span class="dt">Papi Steak with XPEL, Tuesday 6:30 PM.</span></li>
+            </ul>
+            <div class="sub-title">DOCUMENTS</div>
+            <ul class="checklist">
+                <li><input type="checkbox" data-key="p10"><span class="nm">Passport</span><span class="dt">Needed Friday for Costa Rica.</span></li>
+                <li><input type="checkbox" data-key="p11"><span class="nm">Driver's license</span><span class="dt">For the National rental in Liberia.</span></li>
+                <li><input type="checkbox" data-key="p12"><span class="nm">Registration ID</span><span class="dt">290817</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ═══ EMERGENCY ═══ -->
+    <div class="panel" id="emergency">
+        <div class="ref-section">
+            <h2 class="ref-title">Emergency Info</h2>
+            <div class="ref-rule"></div>
+            <div class="sub-title">NUMBERS</div>
+            <div class="phrase"><span class="ph">911</span><span class="say">Police · Fire · Ambulance</span><span class="en">Any emergency in Las Vegas.</span></div>
+            <div class="phrase"><span class="ph">311</span><span class="say">Las Vegas Metro Police</span><span class="en">Non-emergency line from a local phone.</span></div>
+            <div class="phrase"><span class="ph">1-800-864-8331</span><span class="say">United Airlines</span><span class="en">Reservations and changes. Conf K0D4JY (EWR→LAS), JG7BQF (Costa Rica).</span></div>
+            <div class="sub-title">HOSPITAL</div>
+            <div class="phrase"><span class="ph">Sunrise Hospital</span><span class="say">3186 S Maryland Pkwy</span><span class="en">24-hour emergency room, a short drive east of the convention center.</span></div>
+            <div class="sub-title">AT THE SHOW</div>
+            <p class="ref-note">On the show floor, flag down LVCC security or SEMA show staff — they can call first aid to you.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+    <div class="footer-mark">SEMA</div>
+    BRADLEY · LAS VEGAS · NOVEMBER 2026
+    <div class="footer-trips"><a href="index.html">All trips</a> · <a href="costa-rica.html">Costa Rica</a> · <a href="japan.html">Japan</a></div>
+</footer>
+
+<script src="assets/trip.js"></script>
+</body>
+</html>
