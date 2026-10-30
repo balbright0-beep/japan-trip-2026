@@ -262,6 +262,24 @@
 .marquee-track b { font-weight: 400; color: var(--gold); text-shadow: 0 0 8px var(--gold); margin: 0 0.7em; }
 @keyframes ticker { to { transform: translateX(-50%); } }
 
+/* Vegas ride list */
+.rides { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+.ride { position: relative; display: flex; flex-direction: column; background: #1A1A22; border: 1px solid #2B2B35; border-radius: 6px; padding: 1.15rem 1.1rem 0.9rem; }
+.ride::before { content: ''; position: absolute; top: -1px; left: 14px; right: 14px; height: 3px; border-radius: 0 0 3px 3px; background: var(--ride); box-shadow: 0 0 10px var(--ride); }
+.ride-loop { --ride: #FF3D8B; }
+.ride-zoox { --ride: #2FD6E8; }
+.ride-cyber { --ride: #C9C4BC; }
+.ride-head { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; }
+.ride-name { font-family: var(--font-display); font-size: 1.9rem; letter-spacing: 0.05em; line-height: 1; color: #FFF4F8; text-shadow: 0 0 10px var(--ride); }
+.ride-status { font-family: var(--font-cond); font-weight: 700; font-size: 0.68rem; letter-spacing: 0.12em; white-space: nowrap; padding: 1px 7px; color: #121218; background: var(--ride); transform: skewX(-12deg); }
+.ride-status.off { color: var(--stone); background: transparent; border: 1px dashed var(--stone); }
+.ride-sub { font-size: 0.78rem; color: var(--stone); margin: 0.3rem 0 0.6rem; }
+.ride dl { margin: 0; flex: 1; }
+.ride dt { font-family: var(--font-cond); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ride); margin-top: 0.55rem; }
+.ride dd { margin: 0.1rem 0 0; font-size: 0.8rem; line-height: 1.5; color: var(--slate); }
+.ride-done { display: flex; align-items: center; gap: 0.45rem; margin-top: 0.9rem; padding-top: 0.7rem; border-top: 1px dashed #34343F; font-family: var(--font-cond); font-weight: 600; font-size: 0.8rem; letter-spacing: 0.14em; cursor: pointer; }
+.ride-done input { accent-color: var(--ride); }
+
 /* lunch options inside an alert */
 .options { margin: 0.4rem 0 0 1rem; }
 .options li { margin: 0.25rem 0; }
@@ -334,6 +352,8 @@
     .facts, .fact, .glance-item, .tracker td, .fun-fact, .stop-alert { background: #f4f4f4 !important; box-shadow: none !important; }
     .fact::before, .fact::after, .fun-fact::before { display: none; }
     .booth { background: #fff; color: #111; box-shadow: inset 0 0 0 1px #111; }
+    .ride { background: #f4f4f4 !important; }
+    .ride-name { color: #111 !important; text-shadow: none !important; }
     .panel-num, .panel-mark, .glance-value, .footer-mark { color: #111 !important; -webkit-text-stroke: 0; text-shadow: none !important; }
 }
 </style>
@@ -459,6 +479,7 @@
         <button class="tab" data-panel="day-3"><span class="tab-num">03</span><span class="tab-label">Thu · Lots</span></button>
         <div class="nav-sep"></div>
         <button class="tab" data-panel="vendors"><span class="tab-text">◎ Vendors</span></button>
+        <button class="tab" data-panel="rides"><span class="tab-text">🚕 Rides</span></button>
         <button class="tab" data-panel="actions"><span class="tab-text">☑ Actions</span></button>
         <button class="tab" data-panel="costs"><span class="tab-text">$ Costs</span></button>
         <button class="tab" data-panel="tips"><span class="tab-text">→ Getting Around</span></button>
@@ -500,6 +521,7 @@
             <div class="stop-body">
                 <div class="stop-name">Land at Harry Reid International (LAS) <span class="tag t-move">TRANSIT</span> <a href="https://maps.apple.com/?ll=36.0840,-115.1537&q=Harry+Reid+International+Airport" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
                 <div class="stop-notes">United arrives at <b>Terminal 3</b>. Taxis wait outside T3 baggage claim near door 52 (Level Zero); the Fontainebleau is in Zone 3, a <b>flat $30.25</b> fare plus small airport and card fees. Rideshare picks up on the Valet level of the T3 garage. Under 20 minutes to the hotel at 2777 S Las Vegas Blvd, the north end of the Strip.</div>
+                <div class="stop-alert">🚕 <b>Ride list:</b> make this the Zoox ride instead — Level 0, Door 55, cross at the "3" crosswalk to the second island. Details on the Rides tab.</div>
                 <div class="fun-fact"><span class="fun-fact-icon">🏁</span> <span class="fun-fact-text">The airport was McCarran International until December 2021, when it was renamed for Senator Harry Reid. Slot machines sit right at the gates — the first and last chance to gamble in Nevada.</span></div>
             </div>
         </div><div class="stop">
@@ -632,7 +654,7 @@
             <div class="stop-time">4:00 PM</div>
             <div class="stop-body">
                 <div class="stop-name">Flex / revisits <span class="tag t-opt">OPTION</span> <a href="https://maps.apple.com/?ll=36.1316,-115.1517&q=Vegas+Loop+Central+Station" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
-                <div class="stop-notes">Option: Vegas Loop to West Hall for the PRO Happy Hour and Cup winner announcement (4–5 PM, PRO booth <span class="booth">#50237</span>). Or second conversations back in North Hall via the skywalk.</div>
+                <div class="stop-notes">Option: Vegas Loop to West Hall for the PRO Happy Hour and Cup winner announcement (4–5 PM, PRO booth <span class="booth">#50237</span>). Or second conversations back in North Hall via the skywalk. The Loop hop ticks the Tesla tunnel off the ride list.</div>
                 <div class="fun-fact"><span class="fun-fact-icon">🏁</span> <span class="fun-fact-text">The Vegas Loop runs Teslas through tunnels dug by The Boring Company. The convention-center section opened in 2021 and turns a 25-minute walk between halls into about two minutes.</span></div>
             </div>
         </div><div class="stop">
@@ -791,6 +813,48 @@
         </div>
     </div>
 
+    <!-- ═══ RIDES ═══ -->
+    <div class="panel" id="rides">
+        <div class="ref-section">
+            <h2 class="ref-title">Vegas Ride List</h2>
+            <div class="ref-rule"></div>
+            <p class="ref-note">Three driverless rides to tick off while you're in town. Status checked 29 Oct 2026 — apps change fast, so look again when you land.</p>
+            <div class="rides">
+                <div class="ride ride-loop">
+                    <div class="ride-head"><span class="ride-name">Tesla Tunnel</span><span class="ride-status">READY</span></div>
+                    <div class="ride-sub">The Vegas Loop — Teslas in tunnels by The Boring Company</div>
+                    <dl>
+                        <dt>How</dt><dd>Walk up to any Loop station. Free between the five LVCC stations (West, Riviera, Central, Central Plaza, South), 6:15 AM–8 PM — about 2 minutes West ↔ Central.</dd>
+                        <dt>Cost</dt><dd>Free on campus · $7 from the Fontainebleau's own station (Level V1, far lane of Rideshare Pickup)</dd>
+                        <dt>Best slot</dt><dd>Wed 4 PM, Central → West for the PRO Happy Hour. Or Tue 1:30 PM from the hotel instead of the walk.</dd>
+                    </dl>
+                    <label class="ride-done"><input type="checkbox" data-key="r0"> RIDDEN</label>
+                </div>
+                <div class="ride ride-zoox">
+                    <div class="ride-head"><span class="ride-name">Zoox</span><span class="ride-status">LIVE · PAID</span></div>
+                    <div class="ride-sub">Amazon's robotaxi — no steering wheel, seats facing each other</div>
+                    <dl>
+                        <dt>How</dt><dd>Book in the Zoox app (set it up before you fly). Stops are fixed points, not door to door: the airport is one, and riders report trips to and from the Fontainebleau.</dd>
+                        <dt>Cost</dt><dd>Paid since Aug 10, 2026 — roughly $20–30 a ride, a little above Uber or Lyft.</dd>
+                        <dt>Best slot</dt><dd>Tue 12:04 PM, LAS → Fontainebleau. At Terminal 3 go to Level 0, Door 55, cross at the crosswalk marked "3" to the second island — Zoox Pickup Zone. One bag per rider fits on the floor.</dd>
+                        <dt>Not for</dt><dd>Friday's 3:15 AM airport run — it ran 11 AM–1 AM when it launched; check the app for current hours.</dd>
+                    </dl>
+                    <label class="ride-done"><input type="checkbox" data-key="r1"> RIDDEN</label>
+                </div>
+                <div class="ride ride-cyber">
+                    <div class="ride-head"><span class="ride-name">Cybercab</span><span class="ride-status off">NOT IN VEGAS YET</span></div>
+                    <div class="ride-sub">Tesla's two-seat robotaxi — no wheel, no pedals</div>
+                    <dl>
+                        <dt>How</dt><dd>Tesla Robotaxi app. Tesla currently lists rides in Austin, Dallas, Houston, Miami, Orlando and Tampa; public Cybercab rides began in Austin in September. Las Vegas is announced, and Cybercabs have been spotted testing near the Sphere.</dd>
+                        <dt>Cost</dt><dd>Shown in the app before you book.</dd>
+                        <dt>Best slot</dt><dd>If Vegas opens before you leave: Thursday evening, after the halls close.</dd>
+                    </dl>
+                    <label class="ride-done"><input type="checkbox" data-key="r2"> RIDDEN</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ═══ ACTIONS ═══ -->
     <div class="panel" id="actions">
         <div class="ref-section">
@@ -801,6 +865,8 @@
             <ul class="checklist">
                 <li><input type="checkbox" data-key="a0"><span class="nm">Lunch venue</span><span class="dt">Wed 11:30 AM with James — still TBD. Checked options on the Day 02 tab: Cipriani (Resy), Wally's or Vida.</span></li>
                 <li><input type="checkbox" data-key="a1"><span class="nm">SEMAShow app</span><span class="dt">Install it — you need it for the XPEL, Katzkin and Alea booth numbers and the three unconfirmed names.</span></li>
+                <li><input type="checkbox" data-key="a9"><span class="nm">Zoox app</span><span class="dt">Download and add a card before you fly — for the LAS → Fontainebleau ride on Tuesday.</span></li>
+                <li><input type="checkbox" data-key="a10b"><span class="nm">Tesla Robotaxi app</span><span class="dt">Check whether Las Vegas has opened — Cybercab rides are Austin-only as of Oct 29.</span></li>
                 <li><input type="checkbox" data-key="a2"><span class="nm">Passport</span><span class="dt">Carry-on, from Tuesday. Friday's flight goes straight from Las Vegas to Costa Rica.</span></li>
                 <li><input type="checkbox" data-key="a3"><span class="nm">Industry Honors</span><span class="dt">Thu 6 PM, BleauLive Theater, $50. Wristband in North Hall (outside N251) by Wed, or the Fontainebleau box office from 4:30 PM Thu.</span></li>
                 <li><input type="checkbox" data-key="a4"><span class="nm">Badge</span><span class="dt">Did it arrive by mail? If not, collect at West Hall registration with a physical photo ID.</span></li>
