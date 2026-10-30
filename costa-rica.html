@@ -162,6 +162,52 @@
 }
 .footer-mark { font-weight: 600; font-size: 1.6rem; color: var(--accent); opacity: 0.85; }
 .footer-trips a { color: var(--green); font-weight: 700; }
+
+/* facts as luggage tags */
+.facts { padding: 1.6rem 1.5rem 1.5rem; }
+.facts-inner { gap: 1rem; }
+.fact {
+    position: relative;
+    flex-direction: column;
+    gap: 0.25rem;
+    background: var(--paper);
+    border: 1px solid var(--mist);
+    border-radius: 0 20px 0 20px;
+    padding: 0.85rem 1rem 0.85rem 2.1rem;
+    box-shadow: 0 8px 18px -14px rgba(30,42,34,0.6);
+}
+.fact::before {
+    content: '';
+    position: absolute;
+    left: 0.8rem; top: 1.1rem;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--panel-bg);
+    border: 1.5px solid var(--gold);
+}
+
+/* day at a glance: trail signs + a leafy route */
+.glance { gap: 0.6rem; }
+.glance-item { background: rgba(221,239,216,0.55); border-radius: 0 14px 0 14px; padding: 0.4rem 0.95rem 0.45rem; }
+.glance-label { font-family: var(--font-display); font-style: italic; font-weight: 600; font-size: 0.78rem; letter-spacing: 0; text-transform: none; color: var(--green); }
+.glance-value { font-weight: 800; font-size: 0.9rem; }
+.route { font-family: var(--font-display); font-style: italic; font-size: 0.9rem; color: var(--ink); }
+.route li::after { width: 11px; height: 11px; border-radius: 0 70% 0 70%; background: var(--green); }
+.route li:last-child::after { background: var(--accent); }
+.route li + li::before { border-top: 2px dotted var(--gold); }
+
+/* one way to slot the open beach days */
+.slots { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0.7rem; margin-top: 0.6rem; }
+.slot { background: var(--panel-bg); border-radius: 0 16px 0 16px; padding: 0.7rem 0.9rem; }
+.slot-day { font-family: var(--font-display); font-style: italic; font-weight: 600; color: var(--accent2); font-size: 0.95rem; }
+.slot-what { font-size: 0.78rem; color: var(--slate); line-height: 1.5; margin-top: 0.15rem; }
+.slot-what b { color: var(--ink); }
+.slots-note { font-size: 0.72rem; color: var(--stone); margin-top: 0.5rem; font-style: italic; }
+
+/* whole-trip route */
+.journey { width: 100%; max-width: 760px; height: auto; display: block; margin: 0.2rem 0 1.2rem; }
+.journey text { font-family: var(--font-body); }
+.journey .place { font-family: var(--font-display); font-weight: 600; }
 @media (max-width: 640px) {
     .panel-header { flex-wrap: nowrap; }
     .panel-mark { display: none; }
@@ -296,6 +342,13 @@
             <div class="panel-mark">llegada</div>
         </div>
         <p class="panel-narrative">Up before dawn in Las Vegas, through Denver, into Liberia at 4:10 PM — straight to the rental counter before it closes, then a long drive down the Nicoya Peninsula after dark.</p>
+        <div class="glance">
+            <div class="glance-item"><span class="glance-label">In the air</span><span class="glance-value">5:15 AM → 4:10 PM</span></div>
+            <div class="glance-item"><span class="glance-label">Car counter shuts</span><span class="glance-value">5:00 PM</span></div>
+            <div class="glance-item"><span class="glance-label">Drive</span><span class="glance-value">4½–5 hours</span></div>
+            <div class="glance-item"><span class="glance-label">Sleep</span><span class="glance-value">Santa Teresa</span></div>
+        </div>
+        <ol class="route"><li>Las Vegas</li><li>Denver</li><li>Liberia</li><li>National</li><li>Santa Teresa</li></ol>
         <div class="panel-divider"></div>
         <div class="stops"><div class="stop">
             <div class="stop-time">3:45 AM</div>
@@ -364,6 +417,13 @@
             <div class="panel-mark">playa</div>
         </div>
         <p class="panel-narrative">Four open days on the Pacific. Brad's rhythm: sunrise coffee and breakfast, then activities and beach in whichever order the weather favours. Nothing is booked — this is the rotation.</p>
+        <div class="glance">
+            <div class="glance-item"><span class="glance-label">Sunrise</span><span class="glance-value">~5:30 AM</span></div>
+            <div class="glance-item"><span class="glance-label">Sunset</span><span class="glance-value">~5:20 PM</span></div>
+            <div class="glance-item"><span class="glance-label">Fixed</span><span class="glance-value">Cabo Blanco: Sat or Sun</span></div>
+            <div class="glance-item"><span class="glance-label">Sleep</span><span class="glance-value">Santa Teresa ×4</span></div>
+        </div>
+        <ol class="route"><li>Coffee</li><li>Surf or explore</li><li>Beach</li><li>Massage</li><li>Sunset</li></ol>
         <div class="panel-divider"></div>
         <div class="stops"><div class="stop">
             <div class="stop-time">5:30 AM</div>
@@ -411,6 +471,14 @@
                 <div class="stop-notes">Sunset is about 5:20 PM. Afternoon beach straight into it on the good-weather days.</div>
             </div>
         </div></div>
+        <div class="sub-title" style="margin-top:1.6rem;">One way to slot the four days</div>
+        <div class="slots">
+            <div class="slot"><div class="slot-day">Sat 7</div><div class="slot-what"><b>Cabo Blanco</b> early, beach and sunset after. Weekend = reserve open.</div></div>
+            <div class="slot"><div class="slot-day">Sun 8</div><div class="slot-what"><b>Montezuma</b> waterfalls + beach. Cabo Blanco's back-up day if Saturday rains.</div></div>
+            <div class="slot"><div class="slot-day">Mon 9</div><div class="slot-what"><b>Mal País</b> tide pools at low tide, then a <b>beach massage</b>.</div></div>
+            <div class="slot"><div class="slot-day">Tue 10</div><div class="slot-what"><b>Dawn surf</b> and a slow last beach day before the drive.</div></div>
+        </div>
+        <p class="slots-note">A suggestion only — swap days by weather. The one fixed rule: Cabo Blanco is closed Monday and Tuesday.</p>
     </div>
 
     <!-- DAY 6 -->
@@ -424,6 +492,13 @@
             <div class="panel-mark">camino</div>
         </div>
         <p class="panel-narrative">Leave the coast mid-morning and head up into the Guanacaste highland foothills. Pool by late afternoon.</p>
+        <div class="glance">
+            <div class="glance-item"><span class="glance-label">Check out</span><span class="glance-value">Before 11 AM</span></div>
+            <div class="glance-item"><span class="glance-label">Drive</span><span class="glance-value">4½–5½ hours</span></div>
+            <div class="glance-item"><span class="glance-label">Check in</span><span class="glance-value">After 3 PM</span></div>
+            <div class="glance-item"><span class="glance-label">Sleep</span><span class="glance-value">Bagaces</span></div>
+        </div>
+        <ol class="route"><li>Santa Teresa</li><li>On the road</li><li>Bagaces</li><li>Pool</li></ol>
         <div class="panel-divider"></div>
         <div class="stops"><div class="stop">
             <div class="stop-time">9:30 AM</div>
@@ -458,6 +533,11 @@
             <div class="panel-mark">cascadas</div>
         </div>
         <p class="panel-narrative">Brad's brief: a big jungle-hike day, waterfalls, off the beaten path. All three stay as options — decide on the day by weather and legs. None booked.</p>
+        <div class="glance">
+            <div class="glance-item"><span class="glance-label">Pick one</span><span class="glance-value">Sensoria · Río Celeste · Rincón</span></div>
+            <div class="glance-item"><span class="glance-label">Book ahead</span><span class="glance-value">Reservation or SINAC ticket</span></div>
+            <div class="glance-item"><span class="glance-label">Sleep</span><span class="glance-value">Bagaces</span></div>
+        </div>
         <div class="panel-divider"></div>
         <div class="stops"><div class="stop">
             <div class="stop-time">Option A</div>
@@ -501,6 +581,12 @@
             <div class="panel-mark">adiós</div>
         </div>
         <p class="panel-narrative">A last swim, check out, an hour to the airport, and a nonstop to Newark — once the return date is moved.</p>
+        <div class="glance">
+            <div class="glance-item"><span class="glance-label">Check out</span><span class="glance-value">Before 11 AM</span></div>
+            <div class="glance-item"><span class="glance-label">Car back</span><span class="glance-value">3:00 PM</span></div>
+            <div class="glance-item"><span class="glance-label">Wheels up</span><span class="glance-value">5:20 PM → EWR 11:25 PM</span></div>
+        </div>
+        <ol class="route"><li>Bagaces</li><li>Liberia</li><li>Car return</li><li>Newark</li></ol>
         <div class="panel-divider"></div>
         <div class="stops"><div class="stop">
             <div class="stop-time">By 11 AM</div>
@@ -577,6 +663,44 @@
         <div class="ref-section">
             <h2 class="ref-title">Driving + Getting Around</h2>
             <div class="ref-rule"></div>
+            <div class="map-scroll"><svg class="journey" viewBox="0 0 680 250" role="img" aria-label="Route of the trip: Liberia to Santa Teresa, Santa Teresa to Bagaces, Bagaces back to Liberia">
+                <defs>
+                    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                        <path d="M0 1 L8 5 L0 9Z" fill="#946616"/>
+                    </marker>
+                </defs>
+                <!-- Pacific -->
+                <g stroke="#0F7773" stroke-width="1.2" fill="none" opacity="0.35">
+                    <path d="M10 214 q12 -6 24 0 t24 0 t24 0 t24 0 t24 0"/>
+                    <path d="M22 230 q12 -6 24 0 t24 0 t24 0 t24 0"/>
+                    <path d="M10 198 q12 -6 24 0 t24 0 t24 0"/>
+                </g>
+                <text x="16" y="246" fill="#0F7773" font-size="10" font-style="italic" opacity="0.7">Pacific</text>
+                <!-- legs -->
+                <path d="M420 58 C 340 70, 250 100, 150 168" stroke="#C9471F" stroke-width="2.5" stroke-dasharray="2 6" stroke-linecap="round" fill="none" marker-end="url(#arrow)"/>
+                <path d="M146 186 C 270 240, 450 228, 552 168" stroke="#2F6B45" stroke-width="2.5" stroke-dasharray="2 6" stroke-linecap="round" fill="none" marker-end="url(#arrow)"/>
+                <path d="M566 146 C 556 108, 506 74, 446 58" stroke="#0F7773" stroke-width="2.5" stroke-dasharray="2 6" stroke-linecap="round" fill="none" marker-end="url(#arrow)"/>
+                <g font-size="11" font-style="italic">
+                    <text x="250" y="122" fill="#C9471F">Fri 6 · 4½–5 h · mostly after dark</text>
+                    <text x="270" y="236" fill="#2F6B45">Wed 11 · 4½–5½ h</text>
+                    <text x="560" y="94" fill="#0F7773">Fri 13 · 45–60 min</text>
+                </g>
+                <!-- stops -->
+                <g stroke="#1E2A22" stroke-width="2">
+                    <circle cx="432" cy="52" r="11" fill="#E8B83A"/>
+                    <circle cx="138" cy="178" r="11" fill="#C9471F"/>
+                    <circle cx="564" cy="158" r="11" fill="#2F6B45"/>
+                </g>
+                <g fill="#F7F2E6"><circle cx="432" cy="52" r="4"/><circle cx="138" cy="178" r="4"/><circle cx="564" cy="158" r="4"/></g>
+                <text class="place" x="456" y="40" fill="#1E2A22" font-size="17">Liberia · LIR</text>
+                <text x="456" y="57" fill="#746E60" font-size="11">Land Fri 6 · fly home Fri 13</text>
+                <text class="place" x="160" y="168" fill="#1E2A22" font-size="17">Santa Teresa</text>
+                <text x="160" y="184" fill="#746E60" font-size="11">5 nights · Edan's Airbnb</text>
+                <text class="place" x="584" y="164" fill="#1E2A22" font-size="17">Bagaces</text>
+                <text x="584" y="180" fill="#746E60" font-size="11">2 nights</text>
+                <text x="584" y="194" fill="#746E60" font-size="11">Diego's Airbnb</text>
+                <text x="0" y="0" fill="#746E60" font-size="10" transform="translate(674 246)" text-anchor="end" font-style="italic">schematic · not to scale</text>
+            </svg></div>
             <div class="tip">Costa Rica drives on the <b>right</b>.</div>
             <div class="tip">Santa Teresa roads are <b>rough and partly unpaved</b>. Allow the full drive times, and don't rush the Nov 6 night drive.</div>
             <div class="tip">It gets dark fast: sunrise ~5:30 AM, sunset ~5:20 PM. Plan the Wednesday drive for daylight.</div>

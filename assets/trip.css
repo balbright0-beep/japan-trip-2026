@@ -36,7 +36,7 @@ body {
     bottom: -2px;
     left: 50%;
     transform: translateX(-50%);
-    width: max(900px, 80vw);
+    width: max(1100px, 100vw);   /* edge to edge, cropped at the sides on phones */
     height: auto;
 }
 .particle {
@@ -75,7 +75,7 @@ body {
     position: relative;
     z-index: 2;
     text-align: center;
-    padding: 2rem;
+    padding: 2rem 2rem clamp(5rem, 20vh, 12rem);   /* keep the text clear of the artwork */
     max-width: 680px;
 }
 .hero-kicker {
@@ -225,6 +225,44 @@ body {
     max-width: 620px;
 }
 .panel-divider { height:1px; background:var(--gold); opacity:0.35; margin-bottom:1rem; }
+/* ═══ DAY AT A GLANCE: key numbers + the day's route ═══ */
+.glance {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem 2rem;
+    margin: 0 0 1rem;
+}
+.glance-item { display: flex; flex-direction: column; min-width: 0; }
+.glance-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+.glance-value { font-size: 0.9rem; font-weight: 600; color: var(--ink); line-height: 1.3; }
+.route {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    row-gap: 0.5rem;
+    margin: 0 0 1.2rem;
+    font-size: 0.72rem;
+    color: var(--slate);
+}
+.route li { position: relative; display: flex; align-items: center; padding-left: 15px; }
+.route li::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 50%;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    background: var(--accent);
+}
+.route li + li { margin-left: 40px; }
+.route li + li::before {
+    content: '';
+    position: absolute;
+    left: -34px; top: 50%;
+    width: 28px;
+    border-top: 2px solid var(--mist);
+}
 .panel-cover {
     font-size: 0.72rem;
     color: var(--stone);
@@ -377,7 +415,7 @@ body {
 
 /* ═══ RESPONSIVE ═══ */
 @media (max-width: 640px) {
-    .hero-content { padding: 1.5rem; }
+    .hero-content { padding: 3.5rem 1.5rem clamp(5rem, 22vh, 12rem); }
     .trips-link { left: 1rem; }
     .panels { padding: 0 1rem; }
     .panel-header { flex-wrap: wrap; }
@@ -389,7 +427,12 @@ body {
     .facts-inner { grid-template-columns: 1fr; }
     .tab { padding: 0.5rem 0.65rem; }
     .phrase { grid-template-columns: 1fr; gap: 0.15rem; }
+    .map-scroll svg { min-width: 600px; }
+    .glance { gap: 0.5rem; }
+    .glance-item { min-width: 0; }
 }
+/* maps keep a readable size on phones and scroll sideways instead of shrinking */
+.map-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .particle { display: none; }

@@ -202,6 +202,66 @@
     text-shadow: 0 0 6px var(--accent), 0 0 16px var(--accent);
 }
 .footer-trips a { font-family: var(--font-cond); font-size: 0.8rem; color: var(--accent2); }
+/* facts as show credentials */
+.facts { padding: 1.9rem 1.5rem 1.5rem; }
+.facts-inner { gap: 1rem; }
+.fact {
+    position: relative;
+    flex-direction: column;
+    gap: 0.3rem;
+    background: #1C1C25;
+    border: 1px solid #2E2E3A;
+    border-radius: 6px;
+    padding: 0.9rem 1rem 0.85rem;
+}
+.fact::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: 14px; right: 14px;
+    height: 3px;
+    border-radius: 0 0 3px 3px;
+    background: var(--accent2);
+    box-shadow: 0 0 10px var(--accent2);
+}
+.fact:nth-child(2)::before { background: var(--gold); box-shadow: 0 0 10px var(--gold); }
+.fact:nth-child(3)::before { background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+.fact::after {
+    content: '';
+    position: absolute;
+    top: 11px; right: 14px;
+    width: 24px; height: 5px;
+    border-radius: 3px;
+    background: #0E0E14;
+    box-shadow: inset 0 1px 1px #000;
+}
+.fact-label { padding-top: 0; }
+
+/* day at a glance: dashboard readouts + a checkpoint route */
+.glance { gap: 0.7rem; }
+.glance-item { background: #1A1A22; border: 1px solid #2B2B35; border-radius: 4px; padding: 0.45rem 0.85rem 0.5rem; min-width: 130px; }
+.glance-label { font-family: var(--font-cond); font-size: 0.66rem; letter-spacing: 0.16em; color: var(--accent2); }
+.glance-value { font-family: var(--font-display); font-weight: 400; font-size: 1.35rem; letter-spacing: 0.04em; color: #FFF4F8; line-height: 1.1; }
+.route { font-family: var(--font-cond); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+.route li::after { width: 11px; height: 11px; background: #121218; border: 2px solid var(--accent); box-shadow: 0 0 8px var(--accent); box-sizing: border-box; }
+.route li:first-child::after { background: var(--checker) 0 0 / 5px 5px; border-color: var(--ink); box-shadow: none; }
+.route li:last-child::after { background: var(--accent); }
+.route li + li::before { border-top: 2px dashed #4A4A58; }
+
+/* category tracker */
+.tracker { border-collapse: separate; border-spacing: 0 4px; width: 100%; max-width: 560px; }
+.tracker th { font-family: var(--font-cond); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; color: var(--stone); text-align: center; padding-bottom: 0.2rem; }
+.tracker td { padding: 0.45rem 0; text-align: center; background: #17171E; }
+.tracker td:first-child { text-align: left; padding-left: 0.8rem; font-weight: 600; font-size: 0.85rem; border-radius: 4px 0 0 4px; }
+.tracker td:last-child { border-radius: 0 4px 4px 0; }
+.tracker i { display: inline-block; width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid #3A3A46; vertical-align: middle; }
+.tracker i.on { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 10px var(--accent); }
+.tracker i.half { border-color: var(--accent2); box-shadow: 0 0 6px var(--accent2), inset 0 0 0 3px #17171E; background: var(--accent2); }
+.tracker-key { font-family: var(--font-cond); font-size: 0.75rem; letter-spacing: 0.06em; color: var(--stone); margin-top: 0.4rem; }
+.tracker-key i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin: 0 0.3rem 0 0.8rem; vertical-align: -1px; }
+
+/* campus map */
+.campus { width: 100%; max-width: 760px; height: auto; display: block; margin: 0.4rem 0 0.6rem; }
+.campus text { font-family: var(--font-cond); }
 @media (prefers-reduced-motion: reduce) { .hero-title { animation: none; } }
 </style>
 </head>
@@ -340,6 +400,12 @@
             <div class="panel-mark">WEST</div>
         </div>
         <p class="panel-narrative">Morning flight from Newark, check in at the Fontainebleau, then a tight three-hour pass of West Hall. Hard stop at 6:30 PM for dinner with XPEL.</p>
+        <div class="glance">
+            <div class="glance-item"><span class="glance-label">On the floor</span><span class="glance-value">2:00–5:00 PM</span></div>
+            <div class="glance-item"><span class="glance-label">Hall</span><span class="glance-value">West</span></div>
+            <div class="glance-item"><span class="glance-label">Hard stop</span><span class="glance-value">6:30 PM · XPEL</span></div>
+        </div>
+        <ol class="route"><li>Newark</li><li>LAS</li><li>Fontainebleau</li><li>West Hall</li><li>Papi Steak</li></ol>
         <div class="panel-divider"></div>
         <div class="stops"><div class="stop">
             <div class="stop-time">9:11 AM</div>
@@ -427,6 +493,12 @@
             <div class="panel-mark">NORTH</div>
         </div>
         <p class="panel-narrative">Sound and cameras in North Hall all morning, lunch with James from London, then interior trim and the OEM side of cameras in Central Hall.</p>
+        <div class="glance">
+            <div class="glance-item"><span class="glance-label">On the floor</span><span class="glance-value">9:00 AM–5:00 PM</span></div>
+            <div class="glance-item"><span class="glance-label">Halls</span><span class="glance-value">North · Central</span></div>
+            <div class="glance-item"><span class="glance-label">Fixed</span><span class="glance-value">11:30 Lunch · James</span></div>
+        </div>
+        <ol class="route"><li>Fontainebleau</li><li>North Hall</li><li>Lunch</li><li>Central Hall</li><li>Flex</li></ol>
         <div class="panel-divider"></div>
         <div class="stops"><div class="stop">
             <div class="stop-time">8:40 AM</div>
@@ -501,6 +573,12 @@
             <div class="panel-mark">LOTS</div>
         </div>
         <p class="panel-narrative">No fixed commitments. Wheels in the outdoor lots before the heat and crowds, side steps in the Diamond Lot, then an afternoon for stragglers and second conversations.</p>
+        <div class="glance">
+            <div class="glance-item"><span class="glance-label">Outdoors</span><span class="glance-value">9:00 AM–12:00</span></div>
+            <div class="glance-item"><span class="glance-label">Fixed</span><span class="glance-value">None</span></div>
+            <div class="glance-item"><span class="glance-label">Friday wheels-up</span><span class="glance-value">5:15 AM</span></div>
+        </div>
+        <ol class="route"><li>Silver Lot</li><li>South Hall</li><li>Diamond Lot</li><li>Mop-up</li><li>Pack</li></ol>
         <div class="panel-divider"></div>
         <div class="stops"><div class="stop">
             <div class="stop-time">9:00 AM</div>
@@ -617,14 +695,15 @@
                 <li><input type="checkbox" data-key="v53"><span class="nm">Stinger</span><span class="dt">North #10673</span></li>
             </ul>
             <div class="sub-title">CATEGORY TRACKER</div>
-            <table class="costs-table">
-                <tr><th>Category</th><th>When</th></tr>
-                <tr><td>Interior trim</td><td>Tue (West) + Wed (Central)</td></tr>
-                <tr><td>Cameras</td><td>Wed</td></tr>
-                <tr><td>Side steps</td><td>Tue (West) + Thu (Diamond Lot)</td></tr>
-                <tr><td>Wheels</td><td>Wed (Central preview) + Thu (lots / South)</td></tr>
-                <tr><td>Sound</td><td>Wed (North)</td></tr>
+            <table class="tracker">
+                <tr><th></th><th>TUE</th><th>WED</th><th>THU</th></tr>
+                <tr><td>Interior trim</td><td><i class="on" title="West Hall: Katzkin, Alea"></i></td><td><i class="on" title="Central Hall: Dynamat, HushMat, TMI"></i></td><td><i class="half" title="Mop-up: Alea at Mopar #59119"></i></td></tr>
+                <tr><td>Cameras</td><td><i></i></td><td><i class="on" title="North Hall + Gentex"></i></td><td><i></i></td></tr>
+                <tr><td>Side steps</td><td><i class="on" title="Westin, Black Horse"></i></td><td><i></i></td><td><i class="on" title="RealTruck, Diamond Lot"></i></td></tr>
+                <tr><td>Wheels</td><td><i></i></td><td><i class="half" title="Mickey Thompson preview, Central"></i></td><td><i class="on" title="Silver Lot + South Hall"></i></td></tr>
+                <tr><td>Sound</td><td><i></i></td><td><i class="on" title="North Hall sweep"></i></td><td><i></i></td></tr>
             </table>
+            <div class="tracker-key"><i style="background:var(--accent);box-shadow:0 0 8px var(--accent)"></i>Main pass <i style="background:var(--accent2);box-shadow:0 0 6px var(--accent2)"></i>Preview / mop-up</div>
             <p class="ref-note" style="margin-top:1rem;">The official exhibitor directory (Map Your Show) couldn't be read directly. Booth numbers come from SEMA's own published 2026 schedules and exhibitor announcements, plus Trade Show Buzz (directory data as of Sep 14, 2026). The SEMA app on site is the final word.</p>
         </div>
     </div>
@@ -672,6 +751,67 @@
         <div class="ref-section">
             <h2 class="ref-title">Getting Around the LVCC</h2>
             <div class="ref-rule"></div>
+            <div class="map-scroll"><svg class="campus" viewBox="0 0 640 420" role="img" aria-label="Schematic map of the Las Vegas Convention Center campus">
+                <rect width="640" height="420" rx="8" fill="#15151C"/>
+                <!-- streets -->
+                <rect x="34" y="0" width="16" height="420" fill="#22222C"/>
+                <text x="0" y="0" transform="translate(45 300) rotate(-90)" fill="#6E6A66" font-size="10" letter-spacing="2">LAS VEGAS BLVD</text>
+                <rect x="296" y="0" width="16" height="420" fill="#22222C"/>
+                <text x="0" y="0" transform="translate(307 400) rotate(-90)" fill="#6E6A66" font-size="10" letter-spacing="2">PARADISE RD</text>
+                <!-- Fontainebleau -->
+                <rect x="62" y="18" width="62" height="58" rx="3" fill="#24222F" stroke="#F4B740" stroke-width="1.2"/>
+                <text x="93" y="44" text-anchor="middle" fill="#F4B740" font-size="10" font-weight="700" letter-spacing="1">FONTAINE-</text>
+                <text x="93" y="56" text-anchor="middle" fill="#F4B740" font-size="10" font-weight="700" letter-spacing="1">BLEAU</text>
+                <!-- Diamond Lot -->
+                <rect x="62" y="104" width="78" height="150" rx="3" fill="none" stroke="#8C8A86" stroke-width="1.2" stroke-dasharray="4 3"/>
+                <text x="101" y="172" text-anchor="middle" fill="#C9C4BC" font-size="11" font-weight="700" letter-spacing="1">DIAMOND</text>
+                <text x="101" y="185" text-anchor="middle" fill="#C9C4BC" font-size="11" font-weight="700" letter-spacing="1">LOT</text>
+                <text x="101" y="202" text-anchor="middle" fill="#FFD84D" font-size="9.5">RealTruck W140</text>
+                <!-- West Hall -->
+                <rect x="152" y="96" width="132" height="166" rx="4" fill="#1D1C26" stroke="#2FD6E8" stroke-width="1.5"/>
+                <text x="218" y="170" text-anchor="middle" fill="#F1ECE4" font-size="16" font-weight="700" letter-spacing="2">WEST HALL</text>
+                <text x="218" y="188" text-anchor="middle" fill="#2FD6E8" font-size="10.5" letter-spacing="1">BOOTHS 50000s</text>
+                <text x="218" y="203" text-anchor="middle" fill="#A29D96" font-size="9.5">XPEL · Katzkin · Alea · PRO #50237</text>
+                <text x="218" y="216" text-anchor="middle" fill="#A29D96" font-size="9.5">Mopar #59119</text>
+                <!-- North Hall -->
+                <rect x="326" y="34" width="276" height="96" rx="4" fill="#1D1C26" stroke="#2FD6E8" stroke-width="1.5"/>
+                <text x="464" y="78" text-anchor="middle" fill="#F1ECE4" font-size="16" font-weight="700" letter-spacing="2">NORTH HALL</text>
+                <text x="464" y="96" text-anchor="middle" fill="#2FD6E8" font-size="10.5" letter-spacing="1">BOOTHS 10000s · SOUND + CAMERAS</text>
+                <!-- Central Hall -->
+                <rect x="326" y="146" width="276" height="100" rx="4" fill="#1D1C26" stroke="#2FD6E8" stroke-width="1.5"/>
+                <text x="464" y="192" text-anchor="middle" fill="#F1ECE4" font-size="16" font-weight="700" letter-spacing="2">CENTRAL HALL</text>
+                <text x="464" y="210" text-anchor="middle" fill="#2FD6E8" font-size="10.5" letter-spacing="1">BOOTHS 20000s · TRIM + GENTEX</text>
+                <text x="344" y="141" fill="#6E6A66" font-size="9" letter-spacing="1">GRAND LOBBY</text>
+                <!-- Silver Lot / Central Plaza -->
+                <rect x="452" y="258" width="150" height="50" rx="3" fill="none" stroke="#8C8A86" stroke-width="1.2" stroke-dasharray="4 3"/>
+                <text x="527" y="279" text-anchor="middle" fill="#C9C4BC" font-size="11" font-weight="700" letter-spacing="1">SILVER LOT</text>
+                <text x="527" y="295" text-anchor="middle" fill="#D9D4CC" font-size="9.5">RAYS 84000 · MT 80001</text>
+                <rect x="334" y="268" width="96" height="22" rx="11" fill="none" stroke="#C59BFF" stroke-width="1.2"/>
+                <text x="382" y="283" text-anchor="middle" fill="#C59BFF" font-size="9.5" letter-spacing="1">MONORAIL STN</text>
+                <!-- South Hall -->
+                <rect x="326" y="320" width="276" height="80" rx="4" fill="#1D1C26" stroke="#2FD6E8" stroke-width="1.5"/>
+                <text x="464" y="356" text-anchor="middle" fill="#F1ECE4" font-size="16" font-weight="700" letter-spacing="2">SOUTH HALL</text>
+                <text x="464" y="374" text-anchor="middle" fill="#2FD6E8" font-size="10.5" letter-spacing="1">LOWER 40000s · HURONG · TIRE EXPO</text>
+                <!-- concourse North ↔ South -->
+                <path d="M614 82 L614 360" stroke="#8C8A86" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+                <text x="0" y="0" transform="translate(628 290) rotate(-90)" fill="#8C8A86" font-size="9" letter-spacing="1.5">CONCOURSE</text>
+                <!-- Paradise Bridge -->
+                <path d="M284 112 L326 112" stroke="#F4B740" stroke-width="4" stroke-linecap="round"/>
+                <text x="305" y="104" text-anchor="middle" fill="#F4B740" font-size="9" letter-spacing="1">BRIDGE</text>
+                <!-- Vegas Loop -->
+                <path d="M200 84 L146 84 L146 278 L319 278 M319 278 L319 196 M319 278 L319 352" stroke="#FF3D8B" stroke-width="2.2" stroke-dasharray="6 4" fill="none"/>
+                <g fill="#121218" stroke="#FF3D8B" stroke-width="2.5">
+                    <circle cx="200" cy="84" r="6"/><circle cx="276" cy="278" r="6"/><circle cx="319" cy="196" r="6"/><circle cx="319" cy="352" r="6"/>
+                </g>
+                <g font-size="9" fill="#FF3D8B" letter-spacing="1">
+                    <text x="212" y="88">RIVIERA STN</text>
+                    <text x="276" y="298" text-anchor="middle">WEST STN</text>
+                    <text x="334" y="238">◂ CENTRAL STN</text>
+                    <text x="334" y="392">◂ SOUTH STN</text>
+                </g>
+                <text x="620" y="22" text-anchor="end" fill="#6E6A66" font-size="9" letter-spacing="1.5">N ↑ · SCHEMATIC, NOT TO SCALE</text>
+            </svg></div>
+            <div class="tracker-key" style="margin-bottom:1.2rem;"><i style="background:#FF3D8B"></i>Vegas Loop (free on campus) <i style="background:#F4B740"></i>Paradise Bridge (walk) <i style="background:#8C8A86"></i>Concourse (walk)</div>
             <div class="tip"><b>Show hours:</b> 9:00 AM–5:00 PM Tue, Wed, Thu.</div>
             <div class="tip"><b>Vegas Loop</b> is free on campus and links the West, Central and South stations — about 2 min against a walk of up to 25. Use it for every West ↔ Central hop.</div>
             <div class="tip"><b>West ↔ North:</b> the Skywalk / Paradise Bridge.</div>
