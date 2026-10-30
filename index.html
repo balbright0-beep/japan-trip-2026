@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="assets/gate.js"></script>
 <title>Trips — 2026</title>
 <script>
 // Links to the old single-page Japan site (e.g. /#day-3) now live on japan.html.
@@ -155,6 +156,7 @@ body {
 .cr .chip { color: #2F6B45; background: rgba(47,107,69,0.12); border-radius: 999px; }
 .cr .go { font-family: 'Fraunces', serif; font-style: italic; font-size: 0.85rem; color: #C9471F; letter-spacing: 0.02em; }
 
+.lock-btn { font: inherit; letter-spacing: inherit; color: var(--gold); background: none; border: none; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
 .foot { text-align: center; padding: 2rem 1rem 3rem; color: var(--stone); font-size: 0.65rem; letter-spacing: 0.15em; border-top: 1px solid var(--mist); }
 @media (max-width: 640px) {
     .wrap { padding: 0 1rem; }
@@ -336,7 +338,7 @@ body {
     </section>
 </div>
 
-<footer class="foot">TRIPS · 2026</footer>
+<footer class="foot">TRIPS · 2026 · <button type="button" class="lock-btn" data-lock>LOCK THIS DEVICE</button></footer>
 
 <script>
 // Status chip on each card, and finished trips move down to "Past trips".
