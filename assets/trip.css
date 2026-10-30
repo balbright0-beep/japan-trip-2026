@@ -433,6 +433,64 @@ body {
 }
 /* maps keep a readable size on phones and scroll sideways instead of shrinking */
 .map-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* ═══ COUNTDOWN, TODAY MODE, TOOLS ═══ */
+.hero-count { display: inline-block; margin: 0 auto 1.4rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; }
+.hero-count:empty { display: none; }
+.stop.is-past { opacity: 0.5; }
+.stop.is-next { box-shadow: inset 3px 0 0 var(--accent); padding-left: 0.6rem; }
+.now-badge {
+    font-size: 0.55rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: var(--paper);
+    background: var(--accent);
+    padding: 1px 6px;
+    border-radius: 2px;
+}
+.speak {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+    padding: 0 0.15rem;
+    opacity: 0.8;
+    transition: opacity 0.2s, transform 0.2s;
+    vertical-align: middle;
+}
+.speak:hover, .speak:focus-visible { opacity: 1; transform: scale(1.15); }
+.tools { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0 0 1.4rem; }
+.tool-btn {
+    font: inherit;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--ink);
+    background: var(--panel-bg);
+    border: 1px solid var(--mist);
+    border-radius: 4px;
+    padding: 0.45rem 0.9rem;
+    transition: border-color 0.2s, color 0.2s;
+}
+.tool-btn:hover { border-color: var(--accent); color: var(--accent); }
+.footer-tools { margin-top: 0.9rem; }
+.footer-tools button { font: inherit; letter-spacing: inherit; background: none; border: none; color: var(--gold); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ═══ PRINT: every panel, on white, no animation ═══ */
+@media print {
+    html:root {
+        --ink: #111; --paper: #fff; --panel-bg: #f4f4f4; --slate: #333; --stone: #555;
+        --mist: #ccc; --gold: #6b4e16; --tint: #f1f1f1; --tint-mid: #999;
+    }
+    body { background: #fff; color: #111; }
+    .hero, .main-nav, .trips-link, .footer-trips, .footer-tools, .tools, .speak, .map-pin, .marquee, .particle { display: none !important; }
+    .panels { max-width: none; padding: 0; }
+    .panel { display: block !important; animation: none; padding: 1rem 0; break-before: page; }
+    .panel:first-child { break-before: auto; }
+    .stop, .fun-fact, .stop-alert, .glance, .route, .checklist li, .phrase, .tip { break-inside: avoid; }
+    .facts { box-shadow: none; }
+    a { color: inherit; text-decoration: none; }
+}
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .particle { display: none; }

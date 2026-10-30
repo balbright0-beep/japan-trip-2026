@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SEMA — November 3–5, 2026</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏁</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/trip.css">
@@ -64,8 +65,9 @@
     color: var(--accent2);
     text-shadow: 0 0 10px rgba(47,214,232,0.55);
 }
+.hero-content { padding-bottom: clamp(6rem, 27vh, 16rem); }
 .hero-title {
-    font-size: clamp(6rem, 22vw, 11rem);
+    font-size: clamp(5.5rem, 19vw, 9.5rem);
     font-weight: 400;
     letter-spacing: 0.06em;
     color: #FFF4F8;
@@ -202,6 +204,68 @@
     text-shadow: 0 0 6px var(--accent), 0 0 16px var(--accent);
 }
 .footer-trips a { font-family: var(--font-cond); font-size: 0.8rem; color: var(--accent2); }
+/* searchlights sweeping behind the skyline */
+.beam {
+    position: absolute;
+    bottom: 90px;
+    width: 180px;
+    height: 95vh;
+    transform-origin: 50% 100%;
+    background: linear-gradient(to top, rgba(47,214,232,0.28), rgba(47,214,232,0) 80%);
+    clip-path: polygon(47% 100%, 53% 100%, 100% 0, 0 0);
+    filter: blur(3px);
+    animation: sweep 12s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+.beam-1 { left: 14%; }
+.beam-2 { left: 66%; background: linear-gradient(to top, rgba(255,61,139,0.26), rgba(255,61,139,0) 80%); animation-duration: 15s; animation-delay: -6s; }
+@keyframes sweep { from { transform: rotate(-24deg); } to { transform: rotate(20deg); } }
+
+/* countdown readout */
+.hero-count {
+    font-family: var(--font-cond);
+    font-size: 0.85rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    border: 1px solid rgba(47,214,232,0.5);
+    border-radius: 3px;
+    padding: 0.3rem 0.9rem;
+    box-shadow: 0 0 12px rgba(47,214,232,0.25), inset 0 0 10px rgba(47,214,232,0.12);
+}
+.hero-count + .hero-rule { margin-top: 0; }
+
+/* Vegas marquee: chasing bulbs + vendor ticker */
+.marquee { position: relative; overflow: hidden; background: #0C0C12; padding: 0.95rem 0; }
+.marquee::before, .marquee::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    height: 6px;
+    background: radial-gradient(circle, #F4B740 0 2px, transparent 2.6px) 0 50% / 16px 6px repeat-x;
+    filter: drop-shadow(0 0 3px #F4B740);
+    animation: bulbs 0.9s steps(2) infinite;
+}
+.marquee::before { top: 4px; }
+.marquee::after { bottom: 4px; animation-direction: reverse; }
+@keyframes bulbs { to { background-position: 16px 50%; } }
+.marquee-track { display: flex; width: max-content; animation: ticker 70s linear infinite; }
+.marquee-track span {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 0.14em;
+    color: #FFF4F8;
+    white-space: nowrap;
+    text-shadow: 0 0 6px var(--accent), 0 0 14px rgba(255,61,139,0.6);
+}
+.marquee-track b { font-weight: 400; color: var(--gold); text-shadow: 0 0 8px var(--gold); margin: 0 0.7em; }
+@keyframes ticker { to { transform: translateX(-50%); } }
+
+/* lunch options inside an alert */
+.options { margin: 0.4rem 0 0 1rem; }
+.options li { margin: 0.25rem 0; }
+.stop-alert a { color: var(--accent2); }
+
 /* facts as show credentials */
 .facts { padding: 1.9rem 1.5rem 1.5rem; }
 .facts-inner { gap: 1rem; }
@@ -262,14 +326,24 @@
 /* campus map */
 .campus { width: 100%; max-width: 760px; height: auto; display: block; margin: 0.4rem 0 0.6rem; }
 .campus text { font-family: var(--font-cond); }
-@media (prefers-reduced-motion: reduce) { .hero-title { animation: none; } }
+@media (prefers-reduced-motion: reduce) {
+    .hero-title, .beam, .marquee-track, .marquee::before, .marquee::after { animation: none; }
+}
+@media print {
+    .facts, .fact, .glance-item, .tracker td, .fun-fact, .stop-alert { background: #f4f4f4 !important; box-shadow: none !important; }
+    .fact::before, .fact::after, .fun-fact::before { display: none; }
+    .booth { background: #fff; color: #111; box-shadow: inset 0 0 0 1px #111; }
+    .panel-num, .panel-mark, .glance-value, .footer-mark { color: #111 !important; -webkit-text-stroke: 0; text-shadow: none !important; }
+}
 </style>
 </head>
-<body data-store="sema26_">
+<body data-store="sema26_" data-start="2026-11-03" data-end="2026-11-05">
 
 <!-- ═══ HERO ═══ -->
 <section class="hero">
     <div class="hero-bg">
+        <div class="beam beam-1"></div>
+        <div class="beam beam-2"></div>
         <svg class="hero-art" viewBox="0 0 1400 420" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
             <defs>
                 <linearGradient id="cityGlow" x1="0" y1="0" x2="0" y2="1">
@@ -346,11 +420,17 @@
         <h1 class="hero-title">SEMA</h1>
         <div class="hero-date">NOVEMBER 3 – 5, 2026</div>
         <div class="hero-names">Bradley Albright</div>
+        <div class="hero-count" data-countdown data-before="GREEN FLAG IN {days}" data-during="LAP {d} OF {t}" data-after="CHEQUERED FLAG"></div>
         <div class="hero-rule"></div>
         <p class="hero-desc">Three days on the Las Vegas Convention Center floor hunting interior trim, cameras, side steps, wheels and sound. Dinner at Papi Steak with XPEL, lunch with James from London, and a 5:15 AM getaway to Costa Rica at the end.</p>
         <a href="#main" class="hero-scroll">▼ EXPLORE THE SHOW PLAN</a>
     </div>
 </section>
+
+<!-- ═══ MARQUEE ═══ -->
+<div class="marquee" aria-hidden="true">
+    <div class="marquee-track"><span>XPEL<b>★</b>KATZKIN<b>★</b>ALEA<b>★</b>WEATHERTECH<b>★</b>DYNAMAT<b>★</b>RYDEEN<b>★</b>GENTEX<b>★</b>ALPINE<b>★</b>ROCKFORD FOSGATE<b>★</b>WESTIN<b>★</b>BLACK HORSE<b>★</b>REALTRUCK<b>★</b>RAYS<b>★</b>MICKEY THOMPSON<b>★</b>HUSHMAT<b>★</b>METRA<b>★</b></span><span>XPEL<b>★</b>KATZKIN<b>★</b>ALEA<b>★</b>WEATHERTECH<b>★</b>DYNAMAT<b>★</b>RYDEEN<b>★</b>GENTEX<b>★</b>ALPINE<b>★</b>ROCKFORD FOSGATE<b>★</b>WESTIN<b>★</b>BLACK HORSE<b>★</b>REALTRUCK<b>★</b>RAYS<b>★</b>MICKEY THOMPSON<b>★</b>HUSHMAT<b>★</b>METRA<b>★</b></span></div>
+</div>
 
 <!-- ═══ FACTS BAR ═══ -->
 <div class="facts" id="main">
@@ -361,11 +441,11 @@
         </div>
         <div class="fact">
             <span class="fact-label">HOTEL</span>
-            <div class="fact-val"><b>Fontainebleau Las Vegas</b><br>Nov 3–6 · $722.96 on file (work expense)</div>
+            <div class="fact-val"><b>Fontainebleau Las Vegas</b><br>Nov 3–6 · $722.96 on file · 15-min walk to West Hall</div>
         </div>
         <div class="fact">
             <span class="fact-label">SHOW</span>
-            <div class="fact-val">Registration ID <b>290817</b><br>LVCC · 9 AM–5 PM Tue, Wed, Thu</div>
+            <div class="fact-val">Registration ID <b>290817</b><br>LVCC · 9 AM–5 PM Tue–Thu · SEMAShow app</div>
         </div>
     </div>
 </div>
@@ -390,7 +470,7 @@
 <div class="panels">
 
     <!-- DAY 1 -->
-    <div class="panel" id="day-1">
+    <div class="panel" id="day-1" data-date="2026-11-03">
         <div class="panel-header">
             <div class="panel-num">01</div>
             <div class="panel-meta">
@@ -410,29 +490,30 @@
         <div class="stops"><div class="stop">
             <div class="stop-time">9:11 AM</div>
             <div class="stop-body">
-                <div class="stop-name">UA 1631: Newark (EWR) → Las Vegas (LAS) <span class="tag t-flight">FLIGHT</span> <a href="https://maps.apple.com/?ll=40.6956,-74.1777&q=Newark+Liberty+International+Airport+Terminal+C" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
-                <div class="stop-notes">Confirmation K0D4JY. Lands 12:04 PM Pacific — Las Vegas is 3 hours behind New York. This is the changed SEMA flight: original fare $677.52, changed with $0.00 paid, which created the $388.12 United credit later applied to the Costa Rica ticket. <b>Pack your passport in your carry-on</b> — you need it Friday for Costa Rica.</div>
+                <div class="stop-name">UA 1631: Newark (EWR) → Las Vegas (LAS) <span class="tag t-flight">FLIGHT</span> <a href="https://maps.apple.com/?ll=40.6956,-74.1777&q=Newark+Liberty+International+Airport" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
+                <div class="stop-notes">Confirmation K0D4JY. United uses Newark Terminals A and C, so check the app for the gate. Lands 12:04 PM Pacific — Las Vegas is 3 hours behind New York. This is the changed SEMA flight: original fare $677.52, changed with $0.00 paid, which created the $388.12 United credit later applied to the Costa Rica ticket. <b>Pack your passport in your carry-on</b> — you need it Friday for Costa Rica.</div>
                 <div class="fun-fact"><span class="fun-fact-icon">🏁</span> <span class="fun-fact-text">Newark opened in 1928 as the New York area's first major airport, and in the early 1930s it was among the busiest airports in the world.</span></div>
             </div>
         </div><div class="stop">
             <div class="stop-time">12:04 PM</div>
             <div class="stop-body">
                 <div class="stop-name">Land at Harry Reid International (LAS) <span class="tag t-move">TRANSIT</span> <a href="https://maps.apple.com/?ll=36.0840,-115.1537&q=Harry+Reid+International+Airport" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
-                <div class="stop-notes">Taxi or rideshare up the Strip to the Fontainebleau at the north end (2777 S Las Vegas Blvd), roughly 15–20 min.</div>
+                <div class="stop-notes">United arrives at <b>Terminal 3</b>. Taxis wait outside T3 baggage claim near door 52 (Level Zero); the Fontainebleau is in Zone 3, a <b>flat $30.25</b> fare plus small airport and card fees. Rideshare picks up on the Valet level of the T3 garage. Under 20 minutes to the hotel at 2777 S Las Vegas Blvd, the north end of the Strip.</div>
                 <div class="fun-fact"><span class="fun-fact-icon">🏁</span> <span class="fun-fact-text">The airport was McCarran International until December 2021, when it was renamed for Senator Harry Reid. Slot machines sit right at the gates — the first and last chance to gamble in Nevada.</span></div>
             </div>
         </div><div class="stop">
             <div class="stop-time">12:45 PM</div>
             <div class="stop-body">
                 <div class="stop-name">Check in: Fontainebleau Las Vegas <span class="tag t-hotel">HOTEL</span> <a href="https://maps.apple.com/?ll=36.1360,-115.1593&q=Fontainebleau+Las+Vegas" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
-                <div class="stop-notes">$722.96 on file (work expense). If the room isn't ready yet, leave bags with the bell desk — West Hall is a short walk away.</div>
+                <div class="stop-notes">$722.96 on file (work expense). If the room isn't ready yet, leave bags with the bell desk. The hotel has its own Vegas Loop station (Level V1, far lane of Rideshare Pickup, via the South Lobby escalators), but it's $7 a ride to the LVCC — the 15-minute walk usually wins.</div>
                 <div class="fun-fact"><span class="fun-fact-icon">🏁</span> <span class="fun-fact-text">Construction stalled in 2009 and the tower stood unfinished on the Strip for over a decade before it finally opened in December 2023. At 737 ft it is the tallest occupied building in Nevada.</span></div>
             </div>
         </div><div class="stop">
             <div class="stop-time">1:30 PM</div>
             <div class="stop-body">
-                <div class="stop-name">Walk to West Hall <span class="tag t-move">TRANSIT</span> <a href="https://maps.apple.com/?ll=36.1330,-115.1570&q=LVCC+West+Hall" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
-                <div class="stop-notes">SEMA registration ID 290817 ($399, work expense) — have it ready if you still need to collect a badge. On the walk over, open the SEMA app and look up XPEL's booth number; it isn't published anywhere for 2026.</div>
+                <div class="stop-name">Walk to West Hall + badge <span class="tag t-move">TRANSIT</span> <a href="https://maps.apple.com/?ll=36.1330,-115.1570&q=LVCC+West+Hall" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
+                <div class="stop-notes">About 0.7 mi, 15 min: south on Las Vegas Blvd, then east on Convention Center Dr to the West Hall entrance (300 Convention Center Dr). On the way, look up XPEL's booth in the SEMAShow app — it isn't published anywhere for 2026.</div>
+                <div class="stop-alert">Badges were only mailed to people who registered online by Sep 25. If yours didn't come, collect it at West Hall registration (7:30 AM–5 PM) with ID 290817 ($399, work expense) and a <b>physical</b> government photo ID — no copies or phone photos. A lost badge costs $100 to reprint.</div>
                 <div class="fun-fact"><span class="fun-fact-icon">🏁</span> <span class="fun-fact-text">The first SEMA Show was held in 1967 under the grandstands at Dodger Stadium. It has called Las Vegas home since the late 1970s, and West Hall — opened in 2021 — added 1.4 million sq ft to the convention center.</span></div>
             </div>
         </div><div class="stop">
@@ -470,20 +551,21 @@
             <div class="stop-time">5:00 PM</div>
             <div class="stop-body">
                 <div class="stop-name">Halls close <span class="tag t-opt">OPTION</span></div>
-                <div class="stop-notes">Back to the Fontainebleau. The PRO Reception runs 5–7 PM on West Hall's 3rd floor if you want a drink first.</div>
+                <div class="stop-notes">It's already dark — sunset is 4:42 PM. Back to the Fontainebleau, or first the PRO Reception: 5–7 PM in West Hall room W326 (3rd floor), <b>RSVP required</b>.</div>
             </div>
         </div><div class="stop">
             <div class="stop-time">6:30 PM</div>
             <div class="stop-body">
                 <div class="stop-name">Dinner: Papi Steak, Fontainebleau — with XPEL <span class="tag t-eat">EAT</span> <span class="tag t-meet">MEET</span> <a href="https://maps.apple.com/?ll=36.1360,-115.1593&q=Papi+Steak+Fontainebleau+Las+Vegas" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
-                <div class="stop-notes">Reservation with XPEL. This is the hard stop the afternoon plan is built around.</div>
+                <div class="stop-notes">Reservation with XPEL — the hard stop the afternoon plan is built around. Mezzanine level. Dress is upscale casual: no hats, shorts, tank tops, flip-flops or team sportswear. 702-998-3800.</div>
+                <div class="fun-fact"><span class="fun-fact-icon">🏁</span> <span class="fun-fact-text">Papi Steak started in Miami Beach, created by David "Papi" Einhorn and David Grutman. Its namesake dish is a 32 oz Glatt Kosher tomahawk finished with "secret sauce".</span></div>
             </div>
         </div></div>
         <p class="panel-cover"><b>Tuesday covers:</b> XPEL ✓ · Katzkin ✓ · Alea ✓ · WeatherTech ✓ · Interior trim (started) · Side steps (started)</p>
     </div>
 
     <!-- DAY 2 -->
-    <div class="panel" id="day-2">
+    <div class="panel" id="day-2" data-date="2026-11-04">
         <div class="panel-header">
             <div class="panel-num">02</div>
             <div class="panel-meta">
@@ -523,7 +605,7 @@
             <div class="stop-body">
                 <div class="stop-name">Lunch with James <span class="tag t-eat">EAT</span> <span class="tag t-meet">MEET</span></div>
                 <div class="stop-notes">James, a coworker from London, arrives at 11:00 AM. Lunch is blocked 11:30 AM–1:00 PM.</div>
-                <div class="stop-alert">⚠ Venue still to be decided — somewhere near the convention center.</div>
+                <div class="stop-alert">⚠ Venue still to be decided. Checked options that are open at 11:30 on a Wednesday:<ul class="options"><li><b>Cipriani</b>, Wynn Plaza — Harry's Bar heritage, polished room; opens 11:30, $34 three-course daily menu. <a href="https://resy.com/cities/las-vegas-nv/venues/cipriani-las-vegas" target="_blank" rel="noopener">Book on Resy</a></li><li><b>Wally's</b>, Resorts World (The District) — wine bar and restaurant beside the Loop station; weekday lunch 11–3; $4.75 Loop ride from the LVCC. <a href="https://www.sevenrooms.com/explore/wallysrwlasvegas/reservations/create/search/" target="_blank" rel="noopener">Book</a></li><li><b>Vida</b>, Fontainebleau — American brasserie, open until 2 PM; the easiest logistics. <a href="https://fblv.tablz.com/vida" target="_blank" rel="noopener">Book</a></li></ul></div>
             </div>
         </div><div class="stop">
             <div class="stop-time">1:00 PM</div>
@@ -556,14 +638,14 @@
             <div class="stop-time">Evening</div>
             <div class="stop-body">
                 <div class="stop-name">Early night <span class="tag t-opt">REST</span></div>
-                <div class="stop-notes">Friday's flight leaves at 5:15 AM — Thursday night is pack-and-alarm night, so bank sleep now.</div>
+                <div class="stop-notes">Sunset is 4:41 PM. Friday's flight leaves at 5:15 AM — Thursday night is pack-and-alarm night, so bank sleep now.</div>
             </div>
         </div></div>
         <p class="panel-cover"><b>Wednesday covers:</b> Sound ✓ · Cameras ✓ · Dynamat ✓ · Interior trim (finished)</p>
     </div>
 
     <!-- DAY 3 -->
-    <div class="panel" id="day-3">
+    <div class="panel" id="day-3" data-date="2026-11-05">
         <div class="panel-header">
             <div class="panel-num">03</div>
             <div class="panel-meta">
@@ -627,19 +709,19 @@
             <div class="stop-time">3:00 PM</div>
             <div class="stop-body">
                 <div class="stop-name">PRO seminar: "Personalization Drives the Market" <span class="tag t-opt">OPTION</span> <a href="https://maps.apple.com/?ll=36.1345,-115.1525&q=LVCC+North+Hall" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
-                <div class="stop-notes">3:00–4:00 PM, North Hall.</div>
+                <div class="stop-notes">3:00 PM, North Hall — room N257 or N259 (SEMA's two listings disagree, so check the app).</div>
             </div>
         </div><div class="stop">
             <div class="stop-time">6:00 PM</div>
             <div class="stop-body">
                 <div class="stop-name">SEMA Industry Honors <span class="tag t-opt">OPTION</span> <a href="https://maps.apple.com/?ll=36.1360,-115.1593&q=BleauLive+Theater+Fontainebleau+Las+Vegas" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
-                <div class="stop-notes">At the Fontainebleau — BleauLive Theater, reception from 6 PM, ticketed. You're staying there anyway.</div>
+                <div class="stop-notes">At the Fontainebleau's BleauLive Theater — level 2, up the escalators beside the food court. Reception with open bar from 6 PM, ceremony 7:30 PM, cocktail attire. Tickets $50: wristbands in North Hall, 2nd floor outside room N251 (Nov 2–4, 8 AM–5 PM), or the Fontainebleau box office from 4:30 PM Thursday.</div>
             </div>
         </div><div class="stop">
             <div class="stop-time">Night</div>
             <div class="stop-body">
                 <div class="stop-name">Pack for Costa Rica + set the alarm <span class="tag t-hotel">HOTEL</span></div>
-                <div class="stop-notes">UA 361 leaves LAS at 5:15 AM Friday — be at the airport by about 3:45 AM. Passport in the carry-on, Costa Rica clothes on top.</div>
+                <div class="stop-notes">UA 361 leaves LAS at 5:15 AM Friday — be at Terminal 3 by about 3:45 AM. The Vegas Loop doesn't start until 6:15 AM, so book a taxi or rideshare for about 3:15 AM. Passport in the carry-on, Costa Rica clothes on top.</div>
                 <div class="stop-alert">The trip carries on from here: <a href="costa-rica.html">Costa Rica itinerary →</a></div>
             </div>
         </div></div>
@@ -713,12 +795,16 @@
         <div class="ref-section">
             <h2 class="ref-title">Action Items</h2>
             <div class="ref-rule"></div>
+            <div class="tools"><button class="tool-btn" type="button" data-ics="sema-2026">📅 Add the fixed times to my calendar</button><button class="tool-btn" type="button" data-print>🖨 Print / save as PDF</button></div>
             <div class="sub-title">BEFORE THE SHOW</div>
             <ul class="checklist">
-                <li><input type="checkbox" data-key="a0"><span class="nm">Lunch venue</span><span class="dt">Wed 11:30 AM with James — still TBD. Somewhere near the convention center.</span></li>
-                <li><input type="checkbox" data-key="a1"><span class="nm">SEMA app</span><span class="dt">Install it — you need it for the XPEL, Katzkin and Alea booth numbers and the three unconfirmed names.</span></li>
+                <li><input type="checkbox" data-key="a0"><span class="nm">Lunch venue</span><span class="dt">Wed 11:30 AM with James — still TBD. Checked options on the Day 02 tab: Cipriani (Resy), Wally's or Vida.</span></li>
+                <li><input type="checkbox" data-key="a1"><span class="nm">SEMAShow app</span><span class="dt">Install it — you need it for the XPEL, Katzkin and Alea booth numbers and the three unconfirmed names.</span></li>
                 <li><input type="checkbox" data-key="a2"><span class="nm">Passport</span><span class="dt">Carry-on, from Tuesday. Friday's flight goes straight from Las Vegas to Costa Rica.</span></li>
-                <li><input type="checkbox" data-key="a3"><span class="nm">Industry Honors</span><span class="dt">Thu evening, BleauLive Theater — ticketed. Decide if you want to go.</span></li>
+                <li><input type="checkbox" data-key="a3"><span class="nm">Industry Honors</span><span class="dt">Thu 6 PM, BleauLive Theater, $50. Wristband in North Hall (outside N251) by Wed, or the Fontainebleau box office from 4:30 PM Thu.</span></li>
+                <li><input type="checkbox" data-key="a4"><span class="nm">Badge</span><span class="dt">Did it arrive by mail? If not, collect at West Hall registration with a physical photo ID.</span></li>
+                <li><input type="checkbox" data-key="a5"><span class="nm">PRO Reception RSVP</span><span class="dt">Tue 5 PM, West Hall W326 — RSVP required.</span></li>
+                <li><input type="checkbox" data-key="a6"><span class="nm">Friday ride</span><span class="dt">Taxi or rideshare to LAS T3 around 3:15 AM — the Loop starts at 6:15 AM.</span></li>
             </ul>
             <div class="sub-title">ON SITE</div>
             <ul class="checklist">
@@ -742,6 +828,13 @@
                 <tr><td>Fontainebleau Las Vegas<small>On file</small></td><td>$722.96</td></tr>
                 <tr><td>UA 1631 Newark → Las Vegas<small>Original fare. The change was $0.00 and created a $388.12 United credit, later applied to the Costa Rica ticket.</small></td><td>$677.52</td></tr>
                 <tr class="total"><td>Total</td><td>$1,799.48</td></tr>
+            </table>
+            <div class="sub-title">ESTIMATES — NOT BOOKED</div>
+            <table class="costs-table">
+                <tr><th>Item</th><th>Cost</th></tr>
+                <tr><td>Taxi LAS → Fontainebleau<small>Flat Zone 3 fare, plus small airport and card fees</small></td><td>$30.25+</td></tr>
+                <tr><td>Taxi Fontainebleau → LAS, Fri 3:15 AM</td><td>~$30</td></tr>
+                <tr><td>SEMA Industry Honors (optional)</td><td>$50</td></tr>
             </table>
         </div>
     </div>
@@ -786,8 +879,8 @@
                 <rect x="452" y="258" width="150" height="50" rx="3" fill="none" stroke="#8C8A86" stroke-width="1.2" stroke-dasharray="4 3"/>
                 <text x="527" y="279" text-anchor="middle" fill="#C9C4BC" font-size="11" font-weight="700" letter-spacing="1">SILVER LOT</text>
                 <text x="527" y="295" text-anchor="middle" fill="#D9D4CC" font-size="9.5">RAYS 84000 · MT 80001</text>
-                <rect x="334" y="268" width="96" height="22" rx="11" fill="none" stroke="#C59BFF" stroke-width="1.2"/>
-                <text x="382" y="283" text-anchor="middle" fill="#C59BFF" font-size="9.5" letter-spacing="1">MONORAIL STN</text>
+                <rect x="334" y="252" width="96" height="22" rx="11" fill="none" stroke="#C59BFF" stroke-width="1.2"/>
+                <text x="382" y="267" text-anchor="middle" fill="#C59BFF" font-size="9.5" letter-spacing="1">MONORAIL STN</text>
                 <!-- South Hall -->
                 <rect x="326" y="320" width="276" height="80" rx="4" fill="#1D1C26" stroke="#2FD6E8" stroke-width="1.5"/>
                 <text x="464" y="356" text-anchor="middle" fill="#F1ECE4" font-size="16" font-weight="700" letter-spacing="2">SOUTH HALL</text>
@@ -799,25 +892,30 @@
                 <path d="M284 112 L326 112" stroke="#F4B740" stroke-width="4" stroke-linecap="round"/>
                 <text x="305" y="104" text-anchor="middle" fill="#F4B740" font-size="9" letter-spacing="1">BRIDGE</text>
                 <!-- Vegas Loop -->
-                <path d="M200 84 L146 84 L146 278 L319 278 M319 278 L319 196 M319 278 L319 352" stroke="#FF3D8B" stroke-width="2.2" stroke-dasharray="6 4" fill="none"/>
+                <path d="M200 84 L146 84 L146 278 L319 278 M319 278 L319 196 M319 278 L319 352 M319 298 L446 298" stroke="#FF3D8B" stroke-width="2.2" stroke-dasharray="6 4" fill="none"/>
                 <g fill="#121218" stroke="#FF3D8B" stroke-width="2.5">
-                    <circle cx="200" cy="84" r="6"/><circle cx="276" cy="278" r="6"/><circle cx="319" cy="196" r="6"/><circle cx="319" cy="352" r="6"/>
+                    <circle cx="200" cy="84" r="6"/><circle cx="276" cy="278" r="6"/><circle cx="319" cy="196" r="6"/><circle cx="319" cy="352" r="6"/><circle cx="446" cy="298" r="6"/>
                 </g>
                 <g font-size="9" fill="#FF3D8B" letter-spacing="1">
                     <text x="212" y="88">RIVIERA STN</text>
                     <text x="276" y="298" text-anchor="middle">WEST STN</text>
                     <text x="334" y="238">◂ CENTRAL STN</text>
                     <text x="334" y="392">◂ SOUTH STN</text>
+                    <text x="352" y="314">CENTRAL PLAZA STN ▸</text>
                 </g>
                 <text x="620" y="22" text-anchor="end" fill="#6E6A66" font-size="9" letter-spacing="1.5">N ↑ · SCHEMATIC, NOT TO SCALE</text>
             </svg></div>
             <div class="tracker-key" style="margin-bottom:1.2rem;"><i style="background:#FF3D8B"></i>Vegas Loop (free on campus) <i style="background:#F4B740"></i>Paradise Bridge (walk) <i style="background:#8C8A86"></i>Concourse (walk)</div>
             <div class="tip"><b>Show hours:</b> 9:00 AM–5:00 PM Tue, Wed, Thu.</div>
-            <div class="tip"><b>Vegas Loop</b> is free on campus and links the West, Central and South stations — about 2 min against a walk of up to 25. Use it for every West ↔ Central hop.</div>
+            <div class="tip"><b>Walking from the Fontainebleau:</b> about 15 min — south on Las Vegas Blvd, then east on Convention Center Dr to West Hall (300 Convention Center Dr).</div>
+            <div class="tip"><b>Vegas Loop</b> is free between the five LVCC stations — West, Riviera (for Resorts World), Central, Central Plaza (for Encore) and South — about 2 min against a walk of up to 25. LVCC stations run 6:15 AM–8 PM. Use it for every West ↔ Central hop.</div>
+            <div class="tip"><b>Loop from the hotel:</b> the Fontainebleau station is on Level V1 (far lane of Rideshare Pickup, South Lobby escalators) — $7 a ride to any LVCC station.</div>
+            <div class="tip"><b>Monorail:</b> the LVCC stop sits above Desert Inn Rd at Paradise Rd, across the Silver Lot from the halls. $6.25 a ride; 6 AM–2 AM show week.</div>
+            <div class="tip"><b>Taxis + rideshare:</b> the show's hub is the West Hall porte-cochère on Convention Center Dr, across from the Marriott.</div>
             <div class="tip"><b>West ↔ North:</b> the Skywalk / Paradise Bridge.</div>
             <div class="tip"><b>North ↔ South:</b> the climate-controlled concourse.</div>
             <div class="tip"><b>Diamond Lot</b> is beside West Hall. <b>Silver Lot</b> is by the Monorail station.</div>
-            <div class="tip"><b>Fontainebleau</b> is a short walk from West Hall.</div>
+            <div class="tip"><b>Daylight + weather:</b> sunrise ~6:05 AM, sunset ~4:41 PM. Normal highs ~73°F, lows ~52°F.</div>
             <div class="tip"><b>Booth-number blocks:</b> North 10000s · Central 20000s · South Lower 40000s · West 50000s · Silver Lot 80000s. Within a hall, work the numbers in order.</div>
         </div>
     </div>
@@ -827,7 +925,7 @@
         <div class="ref-section">
             <h2 class="ref-title">Packing List</h2>
             <div class="ref-rule"></div>
-            <p class="ref-note">One bag does both trips: Friday you fly straight from Las Vegas to Liberia. Pack the Costa Rica list too — see the <a href="costa-rica.html#packing">Costa Rica packing list</a>.</p>
+            <p class="ref-note">Show week runs ~73°F by day, ~52°F at night, and it's dark by 4:45 PM. One bag does both trips: Friday you fly straight from Las Vegas to Liberia. Pack the Costa Rica list too — see the <a href="costa-rica.html#packing">Costa Rica packing list</a>.</p>
             <div class="sub-title">SHOW DAYS</div>
             <ul class="checklist">
                 <li><input type="checkbox" data-key="p0"><span class="nm">Broken-in shoes</span><span class="dt">Three full days on concrete floors and outdoor lots. Not new shoes.</span></li>
@@ -842,7 +940,7 @@
             <ul class="checklist">
                 <li><input type="checkbox" data-key="p10"><span class="nm">Passport</span><span class="dt">Needed Friday for Costa Rica.</span></li>
                 <li><input type="checkbox" data-key="p11"><span class="nm">Driver's license</span><span class="dt">For the National rental in Liberia.</span></li>
-                <li><input type="checkbox" data-key="p12"><span class="nm">Registration ID</span><span class="dt">290817</span></li>
+                <li><input type="checkbox" data-key="p12"><span class="nm">Registration ID</span><span class="dt">290817 — plus a physical government photo ID if you collect the badge on site.</span></li>
             </ul>
         </div>
     </div>
@@ -854,10 +952,10 @@
             <div class="ref-rule"></div>
             <div class="sub-title">NUMBERS</div>
             <div class="phrase"><span class="ph">911</span><span class="say">Police · Fire · Ambulance</span><span class="en">Any emergency in Las Vegas.</span></div>
-            <div class="phrase"><span class="ph">311</span><span class="say">Las Vegas Metro Police</span><span class="en">Non-emergency line from a local phone.</span></div>
+            <div class="phrase"><span class="ph">311</span><span class="say">Las Vegas Metro Police</span><span class="en">Non-emergency, from a local phone — or 702-828-3111.</span></div>
             <div class="phrase"><span class="ph">1-800-864-8331</span><span class="say">United Airlines</span><span class="en">Reservations and changes. Conf K0D4JY (EWR→LAS), JG7BQF (Costa Rica).</span></div>
             <div class="sub-title">HOSPITAL</div>
-            <div class="phrase"><span class="ph">Sunrise Hospital</span><span class="say">3186 S Maryland Pkwy</span><span class="en">24-hour emergency room, a short drive east of the convention center.</span></div>
+            <div class="phrase"><span class="ph">Sunrise Hospital</span><span class="say">3186 S Maryland Pkwy</span><span class="en">Level I trauma center with a 24-hour ER, about a mile (6 min) from the LVCC. 702-961-5000.</span></div>
             <div class="sub-title">AT THE SHOW</div>
             <p class="ref-note">On the show floor, flag down LVCC security or SEMA show staff — they can call first aid to you.</p>
         </div>
@@ -869,8 +967,21 @@
     <div class="footer-mark">SEMA</div>
     BRADLEY · LAS VEGAS · NOVEMBER 2026
     <div class="footer-trips"><a href="index.html">All trips</a> · <a href="costa-rica.html">Costa Rica</a> · <a href="japan.html">Japan</a></div>
+    <div class="footer-tools"><button type="button" data-print>PRINT OR SAVE AS PDF</button></div>
 </footer>
 
+<script type="application/json" id="trip-events">
+[
+ {"title": "UA 1631 Newark → Las Vegas", "start": "20261103T141100Z", "end": "20261103T200400Z", "where": "Newark Liberty International Airport (EWR)", "note": "Conf K0D4JY. Lands LAS Terminal 3 at 12:04 PM PT."},
+ {"title": "SEMA — West Hall pass", "start": "20261103T220000Z", "end": "20261104T010000Z", "where": "LVCC West Hall, 300 Convention Center Dr, Las Vegas", "note": "XPEL, Katzkin + Alea, PRO Cup #50237, WeatherTech, Westin, Black Horse."},
+ {"title": "Dinner: Papi Steak with XPEL", "start": "20261104T023000Z", "end": "20261104T043000Z", "where": "Papi Steak, Fontainebleau Las Vegas (Mezzanine)", "note": "Upscale casual. 702-998-3800."},
+ {"title": "SEMA — North + Central Halls", "start": "20261104T170000Z", "end": "20261105T010000Z", "where": "Las Vegas Convention Center", "note": "Sound + cameras in North Hall, interior trim + Gentex in Central Hall."},
+ {"title": "Lunch with James", "start": "20261104T193000Z", "end": "20261104T210000Z", "where": "TBD near the LVCC", "note": "Options: Cipriani (Wynn), Wally's (Resorts World), Vida (Fontainebleau)."},
+ {"title": "SEMA — outdoor lots, South Hall, mop-up", "start": "20261105T170000Z", "end": "20261106T010000Z", "where": "Las Vegas Convention Center", "note": "Silver Lot 9 AM, South Hall 10:30, Diamond Lot 11:15, mop-up from 1 PM."},
+ {"title": "SEMA Industry Honors (optional)", "start": "20261106T020000Z", "end": "20261106T050000Z", "where": "BleauLive Theater, Fontainebleau Las Vegas", "note": "Reception 6 PM, ceremony 7:30 PM. Cocktail attire. $50."},
+ {"title": "Be at LAS Terminal 3 for UA 361", "start": "20261106T114500Z", "end": "20261106T131500Z", "where": "Harry Reid International Airport, Terminal 3", "note": "Taxi or rideshare ~3:15 AM — the Loop starts at 6:15 AM. Conf JG7BQF."}
+]
+</script>
 <script src="assets/trip.js"></script>
 </body>
 </html>

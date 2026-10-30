@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Costa Rica — November 6–13, 2026</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌴</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/trip.css">
@@ -208,6 +209,40 @@
 .journey { width: 100%; max-width: 760px; height: auto; display: block; margin: 0.2rem 0 1.2rem; }
 .journey text { font-family: var(--font-body); }
 .journey .place { font-family: var(--font-display); font-weight: 600; }
+
+/* countdown, in a leaf */
+.hero-count {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--paper);
+    background: var(--green);
+    border-radius: 0 16px 0 16px;
+    padding: 0.3rem 1.1rem;
+}
+
+/* the hero breathes: waves roll, birds glide, palms sway, the sun glows */
+.waves { animation: roll 7s linear infinite; }
+.waves-2 { animation-duration: 11s; animation-direction: reverse; }
+@keyframes roll { to { transform: translateX(50px); } }
+.birds { animation: glide 22s ease-in-out infinite alternate; }
+@keyframes glide { from { transform: translate(0, 0); } 50% { transform: translate(-40px, -10px); } to { transform: translate(-70px, 4px); } }
+.fronds { transform-box: view-box; animation: sway 6s ease-in-out infinite alternate; }
+.fronds-l { transform-origin: 190px 300px; }
+.fronds-r { transform-origin: 1230px 268px; animation-duration: 7.5s; animation-delay: -2s; }
+@keyframes sway { from { transform: rotate(-3deg); } to { transform: rotate(3deg); } }
+.sun-glow { transform-box: fill-box; transform-origin: center; animation: glow 6s ease-in-out infinite alternate; }
+@keyframes glow { from { opacity: 0.75; transform: scale(0.94); } to { opacity: 1; transform: scale(1.06); } }
+
+/* eat + drink grid */
+.eats .slot-day { color: var(--accent); }
+.eats .slot-what b { font-weight: 700; color: var(--green); font-size: 0.72rem; }
+.stop-alert a { color: var(--accent2); font-weight: 700; }
+@media (prefers-reduced-motion: reduce) {
+    .waves, .birds, .fronds, .sun-glow { animation: none; }
+}
 @media (max-width: 640px) {
     .panel-header { flex-wrap: nowrap; }
     .panel-mark { display: none; }
@@ -216,7 +251,7 @@
 }
 </style>
 </head>
-<body data-store="cr26_">
+<body data-store="cr26_" data-start="2026-11-06" data-end="2026-11-13">
 
 <!-- ═══ HERO ═══ -->
 <section class="hero">
@@ -237,10 +272,10 @@
                 </radialGradient>
             </defs>
             <!-- sun -->
-            <circle cx="1010" cy="220" r="160" fill="url(#sunGlow)"/>
+            <circle class="sun-glow" cx="1010" cy="220" r="160" fill="url(#sunGlow)"/>
             <circle cx="1010" cy="220" r="58" fill="#EF9446" opacity="0.8"/>
             <!-- birds -->
-            <path d="M860 150 q7 -7 14 0 q7 -7 14 0 M905 128 q5 -5 10 0 q5 -5 10 0 M1120 160 q6 -6 12 0 q6 -6 12 0" stroke="#3B3A33" stroke-width="2" fill="none" opacity="0.45"/>
+            <g class="birds"><path d="M860 150 q7 -7 14 0 q7 -7 14 0 M905 128 q5 -5 10 0 q5 -5 10 0 M1120 160 q6 -6 12 0 q6 -6 12 0" stroke="#3B3A33" stroke-width="2" fill="none" opacity="0.45"/></g>
             <!-- Rincón de la Vieja, steaming -->
             <path d="M260 420 L590 152 Q614 134 640 138 Q656 128 674 136 Q700 132 722 152 L1060 420Z" fill="url(#volc)"/>
             <g fill="#FFFFFF" opacity="0.6">
@@ -261,21 +296,26 @@
             </g>
             <!-- the Pacific -->
             <rect x="0" y="401" width="1400" height="19" fill="url(#sea)"/>
-            <path d="M0 409 q25 -6 50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0" stroke="#E9F5F2" stroke-width="1.4" fill="none" opacity="0.7"/>
+            <path class="waves" d="M-50 409 q25 -6 50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0" stroke="#E9F5F2" stroke-width="1.4" fill="none" opacity="0.7"/>
+            <path class="waves waves-2" d="M-50 416 q25 -5 50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0" stroke="#E9F5F2" stroke-width="1" fill="none" opacity="0.45"/>
             <!-- palms -->
             <g fill="#1E3A2A">
                 <path d="M146 420 Q150 360 186 300 L194 304 Q162 362 158 420Z"/>
+                <g class="fronds fronds-l">
                 <path d="M190 300 Q150 268 108 292 Q150 280 190 300Z"/>
                 <path d="M190 300 Q168 258 128 252 Q166 268 190 300Z"/>
                 <path d="M190 300 Q206 256 246 252 Q210 268 190 300Z"/>
                 <path d="M190 300 Q232 280 268 304 Q228 290 190 300Z"/>
                 <path d="M190 300 Q196 262 180 236 Q204 262 190 300Z"/>
+                </g>
                 <path d="M1262 420 Q1256 340 1226 270 L1234 266 Q1268 338 1274 420Z"/>
+                <g class="fronds fronds-r">
                 <path d="M1230 268 Q1268 238 1312 262 Q1270 250 1230 268Z"/>
                 <path d="M1230 268 Q1252 226 1292 220 Q1254 236 1230 268Z"/>
                 <path d="M1230 268 Q1212 224 1172 220 Q1208 236 1230 268Z"/>
                 <path d="M1230 268 Q1188 250 1152 274 Q1192 260 1230 268Z"/>
                 <path d="M1230 268 Q1226 230 1242 204 Q1218 230 1230 268Z"/>
+                </g>
             </g>
         </svg>
         <div id="particles" data-kind="drift" data-count="12"></div>
@@ -286,6 +326,7 @@
         <h1 class="hero-title">Costa <em>Rica</em></h1>
         <div class="hero-date">NOVEMBER 6 – 13, 2026</div>
         <div class="hero-names">Bradley Albright &amp; Zachary Scharfstein</div>
+        <div class="hero-count" data-countdown data-before="{days} until pura vida" data-during="Día {d} de {t}" data-after="¡Hasta la próxima!"></div>
         <div class="hero-rule"></div>
         <p class="hero-desc">A week from the Pacific surf of Santa Teresa to the waterfalls and volcanoes of the Guanacaste highlands. A Suzuki Jimny, two Airbnbs, sunrise coffee, beach massages, and one big jungle-hike day.</p>
         <a href="#main" class="hero-scroll">▼ EXPLORE THE ITINERARY</a>
@@ -332,7 +373,7 @@
 <div class="panels">
 
     <!-- DAY 1 -->
-    <div class="panel" id="day-1">
+    <div class="panel" id="day-1" data-date="2026-11-06">
         <div class="panel-header">
             <div class="panel-num">01</div>
             <div class="panel-meta">
@@ -388,13 +429,13 @@
             <div class="stop-body">
                 <div class="stop-name">Pick up the car: National <span class="tag t-drive">DRIVE</span> <a href="https://maps.apple.com/?ll=10.5925,-85.5395&q=Hilton+Garden+Inn+Liberia+Airport" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
                 <div class="stop-notes">Confirmation 1697078634. The counter is at the Liberia Apt Hilton Hotel (Hilton Garden Inn), directly in front of the airport. Compact All Terrain 4x4 — Suzuki Jimny or similar — with unlimited miles. Estimated <b>$402.62</b>, paid at the counter. Additional driver: Zachary Scharfstein, so bring both licenses. Photograph the car all the way round before you drive off.</div>
-                <div class="stop-alert">⚠ Counter hours are 8:00 AM–5:00 PM. The 4:00 PM pickup slot is the last hour — go straight there.</div>
+                <div class="stop-alert">⚠ Counter hours are 8:00 AM–5:00 PM. The 4:00 PM pickup slot is the last hour — go straight there. If immigration runs long, call the counter: +506 2242 7878.</div>
             </div>
         </div><div class="stop">
             <div class="stop-time">5:00 PM</div>
             <div class="stop-body">
                 <div class="stop-name">Drive Liberia → Santa Teresa <span class="tag t-drive">DRIVE</span></div>
-                <div class="stop-notes">About 4½–5 hours; arrive around 9:00–10:00 PM. Sunset is about 5:20 PM, so most of it is in the dark, and the Jimny's 4x4 earns its keep on the last stretch. Fill the tank and grab food in Liberia first. Don't rush it.</div>
+                <div class="stop-notes">About 4½–5 hours; arrive around 9:00–10:00 PM. The usual way: Route 21 south through Nicoya and on to Paquera, Route 160 to Cóbano, then Route 618 into Santa Teresa. Don't let Google send you down the west-coast shortcut — it has river crossings. Sunset is 5:16 PM, so most of it is in the dark, with speed bumps through every village; the Jimny's 4x4 earns its keep on the last stretch. Fill the tank and grab food in Liberia first (Nicoya and Cóbano have stations too). Don't rush it.</div>
                 <div class="fun-fact"><span class="fun-fact-icon">🦜</span> <span class="fun-fact-text">Guanacaste province takes its name from the guanacaste tree, Costa Rica's national tree — its canopy often spreads wider than the tree is tall.</span></div>
             </div>
         </div><div class="stop">
@@ -407,7 +448,7 @@
     </div>
 
     <!-- DAYS 2–5 -->
-    <div class="panel" id="day-2">
+    <div class="panel" id="day-2" data-date="2026-11-07..2026-11-10">
         <div class="panel-header">
             <div class="panel-num span">02–05</div>
             <div class="panel-meta">
@@ -418,8 +459,8 @@
         </div>
         <p class="panel-narrative">Four open days on the Pacific. Brad's rhythm: sunrise coffee and breakfast, then activities and beach in whichever order the weather favours. Nothing is booked — this is the rotation.</p>
         <div class="glance">
-            <div class="glance-item"><span class="glance-label">Sunrise</span><span class="glance-value">~5:30 AM</span></div>
-            <div class="glance-item"><span class="glance-label">Sunset</span><span class="glance-value">~5:20 PM</span></div>
+            <div class="glance-item"><span class="glance-label">Sunrise</span><span class="glance-value">~5:35 AM</span></div>
+            <div class="glance-item"><span class="glance-label">Sunset</span><span class="glance-value">~5:16 PM</span></div>
             <div class="glance-item"><span class="glance-label">Fixed</span><span class="glance-value">Cabo Blanco: Sat or Sun</span></div>
             <div class="glance-item"><span class="glance-label">Sleep</span><span class="glance-value">Santa Teresa ×4</span></div>
         </div>
@@ -429,20 +470,20 @@
             <div class="stop-time">5:30 AM</div>
             <div class="stop-body">
                 <div class="stop-name">Sunrise coffee + breakfast <span class="tag t-eat">EAT</span></div>
-                <div class="stop-notes">Sunrise is about 5:30 AM this time of year. Strictly optional — but worth it once or twice for a dawn surf.</div>
+                <div class="stop-notes">Sunrise is about 5:35 AM. Nothing in town opens before 7, so make the sunrise coffee at the Airbnb — stock up at Super Ronny on the first morning. Strictly optional — but worth it once or twice for a dawn surf.</div>
             </div>
         </div><div class="stop">
             <div class="stop-time">Morning</div>
             <div class="stop-body">
                 <div class="stop-name">Surf Playa Santa Teresa / Playa Hermosa <span class="tag t-surf">SURF</span> <a href="https://maps.apple.com/?ll=9.6700,-85.1870&q=Playa+Hermosa+Santa+Teresa+Costa+Rica" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
-                <div class="stop-notes">Surf or an activity in the morning when it's glassy, beach in the afternoon into sunset. On a rainy morning, flip it.</div>
+                <div class="stop-notes">Surf or an activity in the morning when it's glassy, beach in the afternoon into sunset. On a rainy morning, flip it. Santa Teresa is a sand-and-reef beach break, best on a rising tide; watch for rips, urchins and Suck Rock. Boards rent for about $20–30 a day; a 90-minute lesson with gear is about $70–100.</div>
                 <div class="fun-fact"><span class="fun-fact-icon">🦜</span> <span class="fun-fact-text">The Nicoya Peninsula is one of the world's five "Blue Zones" — places where an unusually large share of people live past 100.</span></div>
             </div>
         </div><div class="stop">
             <div class="stop-time">Sat or Sun</div>
             <div class="stop-body">
                 <div class="stop-name">Cabo Blanco Nature Reserve <span class="tag t-hike">HIKE</span> <a href="https://maps.apple.com/?ll=9.5790,-85.1110&q=Reserva+Natural+Absoluta+Cabo+Blanco" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
-                <div class="stop-notes">Arrive early — it closes mid-afternoon. Entry is about $12 per person.</div>
+                <div class="stop-notes">Be there at 8 AM. The Swedish Trail (Sendero Sueco) climbs first, then runs to a wild beach — about 4 km each way, so allow 5–6 hours and leave the beach by about 2 PM. $13.56 per person. Bring plenty of water, snacks, repellent, sandals and a swimsuit. The last mile in is rough and the free lot has had break-ins — leave nothing in the car.</div>
                 <div class="stop-alert">⚠ Open Wednesday–Sunday, 8 AM–4 PM; <b>closed Monday and Tuesday</b>. On this trip that means Saturday or Sunday.</div>
                 <div class="fun-fact"><span class="fun-fact-icon">🦜</span> <span class="fun-fact-text">Cabo Blanco became Costa Rica's first protected area in 1963, thanks to a Swedish-Danish couple, Nicolás Wessberg and Karen Mogensen, who campaigned to save it.</span></div>
             </div>
@@ -450,13 +491,14 @@
             <div class="stop-time">Any day</div>
             <div class="stop-body">
                 <div class="stop-name">Montezuma waterfalls + beach day <span class="tag t-water">WATERFALL</span> <span class="tag t-beach">BEACH</span> <a href="https://maps.apple.com/?ll=9.6560,-85.0710&q=Montezuma+Waterfall+Costa+Rica" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
-                <div class="stop-notes">About 45 minutes away, on the opposite coast of the peninsula. Wear shoes that can get wet — the way up to the falls follows the river.</div>
+                <div class="stop-notes">About 30–45 minutes away, on the Gulf side of the peninsula. Two ways in: the free riverbed trail to the lower falls (about 20 minutes each way, slippery, with ropes — skip it if the river is up), or the Sun Trails entrance to the upper falls (about ₡3,000; park at Butterfly Brewing; open 8:30 AM–5:30 PM). Allow at least 1½ hours, and wear shoes that can get wet.</div>
+                <div class="stop-alert">⚠ Don't jump. People have died cliff-jumping at the middle falls.</div>
             </div>
         </div><div class="stop">
             <div class="stop-time">Any day</div>
             <div class="stop-body">
                 <div class="stop-name">Mal País fishing village + tide pools <span class="tag t-beach">BEACH</span> <a href="https://maps.apple.com/?ll=9.6050,-85.1440&q=Mal+Pais+Costa+Rica" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
-                <div class="stop-notes">Just south of Santa Teresa. The tide pools are best at low tide.</div>
+                <div class="stop-notes">Just south of Santa Teresa. Turn right at Indigo Yoga onto the dirt road Calle Mar Azul, keep left past the houses and over a big bump into a palm-lined field, and park. Go at low tide — it gets rough as the tide comes in. Water shoes; watch for urchins.</div>
             </div>
         </div><div class="stop">
             <div class="stop-time">Afternoon</div>
@@ -468,7 +510,7 @@
             <div class="stop-time">5:20 PM</div>
             <div class="stop-body">
                 <div class="stop-name">Sunset, Playa Santa Teresa <span class="tag t-beach">BEACH</span> <a href="https://maps.apple.com/?ll=9.6430,-85.1690&q=Playa+Santa+Teresa" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
-                <div class="stop-notes">Sunset is about 5:20 PM. Afternoon beach straight into it on the good-weather days.</div>
+                <div class="stop-notes">Sunset is about 5:16 PM. Afternoon beach straight into it — Banana Beach and El Carmen are the classic sunset bars.</div>
             </div>
         </div></div>
         <div class="sub-title" style="margin-top:1.6rem;">One way to slot the four days</div>
@@ -479,10 +521,13 @@
             <div class="slot"><div class="slot-day">Tue 10</div><div class="slot-what"><b>Dawn surf</b> and a slow last beach day before the drive.</div></div>
         </div>
         <p class="slots-note">A suggestion only — swap days by weather. The one fixed rule: Cabo Blanco is closed Monday and Tuesday.</p>
+        <div class="sub-title" style="margin-top:1.6rem;">Eat + drink in Santa Teresa</div>
+        <div class="slots eats"><div class="slot"><div class="slot-day">Eat Street</div><div class="slot-what"><b>$ · 7 AM–10 PM</b><br>Casual food court; breakfast is pick-up only.</div></div><div class="slot"><div class="slot-day">Café Social</div><div class="slot-what"><b>$ · 7 AM–4 PM</b><br>Coffee and breakfast once town wakes up.</div></div><div class="slot"><div class="slot-day">Soda Tiquicia</div><div class="slot-what"><b>$ · 9 AM–10 PM</b><br>Tico home cooking — order a casado.</div></div><div class="slot"><div class="slot-day">Zula</div><div class="slot-what"><b>$ · noon–10 PM</b><br>Israeli, a local favourite.</div></div><div class="slot"><div class="slot-day">Katana</div><div class="slot-what"><b>$$ · 6–11 PM</b><br>Asian, for dinner.</div></div><div class="slot"><div class="slot-day">Banana Beach</div><div class="slot-what"><b>$$ · on the sand</b><br>Sunset cocktails.</div></div><div class="slot"><div class="slot-day">El Carmen</div><div class="slot-what"><b>Beachfront bar</b><br>Sunset and live music.</div></div><div class="slot"><div class="slot-day">Manzú</div><div class="slot-what"><b>$$$ · beachfront</b><br>The splurge dinner.</div></div></div>
+        <p class="slots-note">From a local guide updated October 2026. Some places close for a week or two between mid-September and mid-November, so check before you go. Bills already include a 10% service charge and 13% tax; anything extra is optional.</p>
     </div>
 
     <!-- DAY 6 -->
-    <div class="panel" id="day-6">
+    <div class="panel" id="day-6" data-date="2026-11-11">
         <div class="panel-header">
             <div class="panel-num">06</div>
             <div class="panel-meta">
@@ -504,7 +549,7 @@
             <div class="stop-time">9:30 AM</div>
             <div class="stop-body">
                 <div class="stop-name">Check out + hit the road <span class="tag t-drive">DRIVE</span></div>
-                <div class="stop-notes">Check out of the Santa Teresa Airbnb before 11:00 AM; aim to leave by 9:30–10:00 AM. The drive to Bagaces is about 4½–5½ hours, landing mid-afternoon.</div>
+                <div class="stop-notes">Check out of the Santa Teresa Airbnb before 11:00 AM; aim to leave by 9:30–10:00 AM. The drive to Bagaces is about 4½–5½ hours, landing mid-afternoon. The Paquera–Puntarenas ferry (Naviera Tambor, about 70 minutes) looks like a shortcut on the map but isn't really faster.</div>
             </div>
         </div><div class="stop">
             <div class="stop-time">3:00 PM</div>
@@ -517,13 +562,13 @@
             <div class="stop-time">Evening</div>
             <div class="stop-body">
                 <div class="stop-name">Pool + pick Thursday's hike <span class="tag t-relax">RELAX</span></div>
-                <div class="stop-notes">Stock up on groceries and trail snacks, check the weather, and choose tomorrow's option. Tenorio and Rincón de la Vieja tickets are sold online only — buy tonight at the latest.</div>
+                <div class="stop-notes">Stock up on groceries and trail snacks, check the weather, and choose tomorrow's option. Tenorio and Rincón de la Vieja tickets are sold online only, and Sensoria needs a reservation — sort it tonight at the latest.</div>
             </div>
         </div></div>
     </div>
 
     <!-- DAY 7 -->
-    <div class="panel" id="day-7">
+    <div class="panel" id="day-7" data-date="2026-11-12">
         <div class="panel-header">
             <div class="panel-num">07</div>
             <div class="panel-meta">
@@ -543,35 +588,36 @@
             <div class="stop-time">Option A</div>
             <div class="stop-body">
                 <div class="stop-name">Sensoria — private reserve <span class="tag t-hike">HIKE</span> <span class="tag t-water">WATERFALL</span> <a href="https://maps.apple.com/?ll=10.8470,-85.3020&q=Sensoria+Rincon+de+la+Vieja" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
-                <div class="stop-notes">North slope of Rincón de la Vieja, about 1 hour away. The most off-the-beaten-path choice: a guided hike through private primary rainforest to blue waterfalls and thermal pools, small groups only.</div>
-                <div class="stop-alert">⚠ Needs an advance reservation.</div>
+                <div class="stop-notes">North slope of Rincón de la Vieja. The most off-the-beaten-path choice: the "Land of Senses" tour is a 7 km guided hike through private primary rainforest to the blue Buenos Aires waterfall and the Jícara and Pilón thermal pools, small groups only, with lunch. Arrive 9 AM, done about 3 PM. Reviewers put it about 1½ hours from Liberia, with a rough last stretch — Sensoria says 4WD is required (the Jimny qualifies).</div>
+                <div class="stop-alert">⚠ Needs an advance reservation: <a href="https://www.sensoria.cr/land-of-senses" target="_blank" rel="noopener">sensoria.cr</a> or WhatsApp +506 8955-4971. $165 per adult — $132 if booked online by Nov 8.</div>
             </div>
         </div><div class="stop">
             <div class="stop-time">Option B</div>
             <div class="stop-body">
                 <div class="stop-name">Tenorio Volcano / Río Celeste <span class="tag t-hike">HIKE</span> <span class="tag t-water">WATERFALL</span> <a href="https://maps.apple.com/?ll=10.7130,-85.0160&q=Parque+Nacional+Volcan+Tenorio+Rio+Celeste" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
-                <div class="stop-notes">About 1½ hours via Bijagua. The most epic single waterfall: the sky-blue Río Celeste falls, and Los Teñideros, where the river turns blue. A 3–4 hour jungle hike — busy at the falls viewpoint, quiet deeper in.</div>
-                <div class="stop-alert">⚠ Tickets are online only at <a href="https://serviciosenlinea.sinac.go.cr/" target="_blank" rel="noopener">serviciosenlinea.sinac.go.cr</a>, for a timed entry slot. Everyone must be out by 4 PM and last entry is early afternoon, so leave Bagaces early.</div>
+                <div class="stop-notes">About 1½ hours: Route 1 toward Cañas, turn off at the Bijagua sign about 10 km before Cañas, through Bijagua, then 9 km east on a paved road. The most epic single waterfall: the trail (about 3 km in, roughly 3 hours there and back) passes the sky-blue Río Celeste falls and Los Teñideros, where the river turns blue. Busy at the falls viewpoint, quiet deeper in. No swimming inside the park — there's a free river spot by the bridge about 1 km past the entrance. Parking about ₡3,000.</div>
+                <div class="stop-alert">⚠ Tickets online only at <a href="https://serviciosenlinea.sinac.go.cr/" target="_blank" rel="noopener">serviciosenlinea.sinac.go.cr</a> ($13.56; 1,200 visitors a day). Entry 8 AM–2 PM, everyone out by 4 PM. The staircase down to the falls reopened only partway after 2025 storm damage — check its status when you book.</div>
                 <div class="fun-fact"><span class="fun-fact-icon">🦜</span> <span class="fun-fact-text">Nothing is dyed: where two clear rivers meet at Los Teñideros ("the dyers"), a change in acidity makes tiny aluminosilicate particles clump together, and they scatter sunlight so the river looks sky-blue.</span></div>
             </div>
         </div><div class="stop">
             <div class="stop-time">Option C</div>
             <div class="stop-body">
                 <div class="stop-name">Rincón de la Vieja — Las Pailas + La Cangreja <span class="tag t-hike">HIKE</span> <span class="tag t-water">WATERFALL</span> <a href="https://maps.apple.com/?ll=10.7720,-85.3510&q=Sector+Las+Pailas+Rincon+de+la+Vieja" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
-                <div class="stop-notes">About 1 hour away. Volcanic jungle: fumaroles and mud pots on the Las Pailas side, then La Cangreja's turquoise plunge pool, with Escondida and Oropéndola falls nearby. The park is closed on Mondays — Thursday is fine. Tickets online at SINAC.</div>
+                <div class="stop-notes">About 1 hour, to the Las Pailas entrance via Curubandé (a private-farm road toll of about ₡800 each). Volcanic jungle: the Las Pailas loop (3 km, about 2 hours) passes fumaroles and mud pots; La Cangreja is 5 km each way to a turquoise pool (4–5 hours round trip, no swimming), with Escondida and Oropéndola falls nearby. Open Tuesday–Sunday 8 AM–3 PM — closed Mondays, so Thursday is fine.</div>
+                <div class="stop-alert">⚠ Tickets online only ($16.95) — nothing is sold at the gate. The waterfall trails stop admitting hikers at noon, so be at the gate by 8 AM for La Cangreja.</div>
                 <div class="fun-fact"><span class="fun-fact-icon">🦜</span> <span class="fun-fact-text">The park is part of the Área de Conservación Guanacaste, a UNESCO World Heritage Site since 1999. "Rincón de la Vieja" means "the old woman's corner", from a local legend.</span></div>
             </div>
         </div><div class="stop">
             <div class="stop-time">Fallback</div>
             <div class="stop-body">
                 <div class="stop-name">Llanos de Cortés + Río Negro hot springs <span class="tag t-relax">EASY DAY</span> <a href="https://maps.apple.com/?ll=10.5180,-85.2810&q=Catarata+Llanos+de+Cortes" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
-                <div class="stop-notes">The light option: Llanos de Cortés waterfall is about 20 minutes from Bagaces, then the Río Negro hot springs.</div>
+                <div class="stop-notes">The light option. Llanos de Cortés waterfall is about 20 minutes from Bagaces: open 8 AM–4 PM (last entry 3:30), $7, free guarded parking, no 4x4 needed. Then the Río Negro hot springs at Hacienda Guachipelín, near Las Pailas: 10 pools plus volcanic mud, $35, 90-minute visits starting hourly 9 AM–4 PM.</div>
             </div>
         </div></div>
     </div>
 
     <!-- DAY 8 -->
-    <div class="panel" id="day-8">
+    <div class="panel" id="day-8" data-date="2026-11-13">
         <div class="panel-header">
             <div class="panel-num">08</div>
             <div class="panel-meta">
@@ -593,6 +639,12 @@
             <div class="stop-body">
                 <div class="stop-name">Check out of the Bagaces Airbnb <span class="tag t-stay">STAY</span></div>
                 <div class="stop-notes">Checkout is before 11:00 AM.</div>
+            </div>
+        </div><div class="stop">
+            <div class="stop-time">11:15 AM</div>
+            <div class="stop-body">
+                <div class="stop-name">Llanos de Cortés on the way <span class="tag t-water">WATERFALL</span> <span class="tag t-opt">OPTIONAL</span> <a href="https://maps.apple.com/?ll=10.5180,-85.2810&amp;q=Catarata+Llanos+de+Cortes" target="_blank" rel="noopener" class="map-pin" title="Open in Apple Maps">📍</a></div>
+                <div class="stop-notes">If you skipped it Thursday: a wide curtain waterfall with a swimmable pool about 20 minutes from Bagaces, on the way to Liberia. $7, open 8 AM–4 PM, free guarded parking.</div>
             </div>
         </div><div class="stop">
             <div class="stop-time">2:00 PM</div>
@@ -621,21 +673,22 @@
         <div class="ref-section">
             <h2 class="ref-title">Action Items</h2>
             <div class="ref-rule"></div>
+            <div class="tools"><button class="tool-btn" type="button" data-ics="costa-rica-2026">📅 Add the fixed times to my calendar</button><button class="tool-btn" type="button" data-print>🖨 Print / save as PDF</button></div>
             <div class="sub-title">Before you go</div>
             <ul class="checklist">
                 <li><input type="checkbox" data-key="a0"><span class="nm">United return date</span><span class="dt">Move UA 1446 from Wed Nov 11 to Fri Nov 13 in the United app. Re-pick the Economy Plus seat; a fare difference may apply.</span></li>
                 <li><input type="checkbox" data-key="a1"><span class="nm">Message Edan</span><span class="dt">Late-arrival heads-up in the Airbnb app before landing Fri — you'll get there ~9–10 PM.</span></li>
-                <li><input type="checkbox" data-key="a2"><span class="nm">Sensoria</span><span class="dt">Reserve ahead if that's the Thursday pick.</span></li>
+                <li><input type="checkbox" data-key="a2"><span class="nm">Sensoria</span><span class="dt">If that's the Thursday pick: <a href="https://www.sensoria.cr/land-of-senses" target="_blank" rel="noopener">sensoria.cr</a> or WhatsApp +506 8955-4971. $132 online until Nov 8, then $165.</span></li>
                 <li><input type="checkbox" data-key="a3"><span class="nm">Park tickets</span><span class="dt">Tenorio / Río Celeste and Rincón de la Vieja sell online only, by time slot: <a href="https://serviciosenlinea.sinac.go.cr/" target="_blank" rel="noopener">serviciosenlinea.sinac.go.cr</a>.</span></li>
                 <li><input type="checkbox" data-key="a4"><span class="nm">Passport</span><span class="dt">Carry it from Newark on Tuesday — you leave for Costa Rica straight from Las Vegas.</span></li>
                 <li><input type="checkbox" data-key="a5"><span class="nm">Both licenses</span><span class="dt">Brad and Zach (the additional driver) at the National counter.</span></li>
                 <li><input type="checkbox" data-key="a6"><span class="nm">Offline maps</span><span class="dt">Waze, plus offline Google Maps for Guanacaste and the Nicoya Peninsula.</span></li>
-                <li><input type="checkbox" data-key="a7"><span class="nm">National's number</span><span class="dt">Save the Liberia counter's phone number in case immigration runs past 5 PM.</span></li>
+                <li><input type="checkbox" data-key="a7"><span class="nm">National's number</span><span class="dt">Save +506 2242 7878 (Hilton Garden Inn counter) in case immigration runs past 5 PM.</span></li>
             </ul>
             <div class="sub-title">On arrival</div>
             <ul class="checklist">
                 <li><input type="checkbox" data-key="a10"><span class="nm">Car before 5 PM</span><span class="dt">Straight to the counter at the Hilton Garden Inn. Photograph the car all round.</span></li>
-                <li><input type="checkbox" data-key="a11"><span class="nm">Cash</span><span class="dt">Small US bills or colones for beach massages and roadside stops.</span></li>
+                <li><input type="checkbox" data-key="a11"><span class="nm">Cash</span><span class="dt">About ₡453 to the dollar; US dollars are widely taken. Small bills for beach massages, parking and park road tolls.</span></li>
                 <li><input type="checkbox" data-key="a12"><span class="nm">Cabo Blanco day</span><span class="dt">Saturday or Sunday — closed Monday and Tuesday.</span></li>
             </ul>
         </div>
@@ -655,6 +708,19 @@
                 <tr class="total"><td>Known total (before bags + Airbnbs)</td><td>$1,651.05</td></tr>
             </table>
             <p class="ref-note" style="margin-top:0.8rem;">Moving the return flight to Nov 13 may add a fare difference.</p>
+            <div class="sub-title">Pay-as-you-go, per person</div>
+            <table class="costs-table">
+                <tr><th>Item</th><th>Cost</th></tr>
+                <tr><td>Surf lesson, 90 min with gear</td><td>$70–100</td></tr>
+                <tr><td>Surfboard rental, per day</td><td>$20–30</td></tr>
+                <tr><td>Cabo Blanco entry</td><td>$13.56</td></tr>
+                <tr><td>Tenorio / Río Celeste entry<small>Plus parking ~₡3,000</small></td><td>$13.56</td></tr>
+                <tr><td>Rincón de la Vieja entry<small>Plus Curubandé road toll ~₡800</small></td><td>$16.95</td></tr>
+                <tr><td>Sensoria "Land of Senses"<small>Online price until Nov 8, then $165</small></td><td>$132</td></tr>
+                <tr><td>Río Negro hot springs</td><td>$35</td></tr>
+                <tr><td>Llanos de Cortés</td><td>$7</td></tr>
+            </table>
+            <p class="ref-note" style="margin-top:0.8rem;">About ₡453 to the US dollar (late Oct 2026). Restaurant bills already include a 10% service charge and 13% tax.</p>
         </div>
     </div>
 
@@ -703,7 +769,12 @@
             </svg></div>
             <div class="tip">Costa Rica drives on the <b>right</b>.</div>
             <div class="tip">Santa Teresa roads are <b>rough and partly unpaved</b>. Allow the full drive times, and don't rush the Nov 6 night drive.</div>
-            <div class="tip">It gets dark fast: sunrise ~5:30 AM, sunset ~5:20 PM. Plan the Wednesday drive for daylight.</div>
+            <div class="tip">It gets dark fast: sunrise ~5:35 AM, sunset ~5:16 PM. Plan the Wednesday drive for daylight.</div>
+            <div class="tip"><b>Liberia → Santa Teresa:</b> Route 21 through Nicoya to Paquera, Route 160 to Cóbano, Route 618 into Santa Teresa. Ignore Google's west-coast shortcut — it has river crossings.</div>
+            <div class="tip"><b>Fuel:</b> Liberia, Nicoya, and Cóbano (the only station near Santa Teresa).</div>
+            <div class="tip"><b>Ferry option:</b> Paquera ↔ Puntarenas with Naviera Tambor — 6:30, 9:00, 12:00, 15:00 and later; about 70 minutes; arrive 45 minutes early. Not faster to Bagaces.</div>
+            <div class="tip"><b>Weather:</b> 2026 is an El Niño year and the forecast for early-to-mid November is very dry in the North Pacific — any rain comes in short bursts.</div>
+            <div class="tip"><b>Your license:</b> a US license is valid for driving here for 3 months.</div>
             <div class="tip"><b>Waze</b> is what most drivers in Costa Rica use. Download offline Google Maps as a backup.</div>
             <div class="tip">Gas stations are <b>full-service</b> — tell the attendant "lleno, por favor" (fill it up).</div>
             <div class="tip">The National counter is at the <b>Hilton Garden Inn in front of LIR</b>, open 8 AM–5 PM.</div>
@@ -718,7 +789,7 @@
         <div class="ref-section">
             <h2 class="ref-title">Packing List</h2>
             <div class="ref-rule"></div>
-            <p class="ref-note">This rides in the same bag as SEMA — you fly straight from Las Vegas. Warm and humid on the coast; the highlands are a little cooler, and November still brings showers.</p>
+            <p class="ref-note">This rides in the same bag as SEMA — you fly straight from Las Vegas. Warm and humid on the coast, a little cooler in the highlands. The forecast is very dry (an El Niño year), with short bursts of rain at most.</p>
             <div class="sub-title">Clothing</div>
             <ul class="checklist">
                 <li><input type="checkbox" data-key="p0"><span class="nm">Swimwear ×2–3</span><span class="dt">Beach, waterfalls, two pools and hot springs. Things don't dry fast in the humidity.</span></li>
@@ -739,7 +810,7 @@
             </ul>
             <div class="sub-title">Documents + money</div>
             <ul class="checklist">
-                <li><input type="checkbox" data-key="p20"><span class="nm">Passports</span><span class="dt">Required for Costa Rica. Photo backup on your phone.</span></li>
+                <li><input type="checkbox" data-key="p20"><span class="nm">Passports</span><span class="dt">Valid for the whole stay; the return ticket is your onward proof. No online entry form, and the departure tax is already in the ticket. Photo backup on your phone.</span></li>
                 <li><input type="checkbox" data-key="p21"><span class="nm">Driver's licenses</span><span class="dt">Both drivers.</span></li>
                 <li><input type="checkbox" data-key="p22"><span class="nm">Credit card</span><span class="dt">The National counter (~$402.62).</span></li>
                 <li><input type="checkbox" data-key="p23"><span class="nm">Small US bills</span><span class="dt">Beach massages are cash.</span></li>
@@ -749,10 +820,10 @@
 
     <!-- ═══ SPANISH ═══ -->
     <div class="panel" id="phrases">
-        <div class="ref-section">
+        <div class="ref-section" data-speak="es-CR">
             <h2 class="ref-title">Tico Spanish</h2>
             <div class="ref-rule"></div>
-            <p class="ref-note">English is common in Santa Teresa, less so in the highlands. A little Spanish goes a long way — and "pura vida" covers almost everything.</p>
+            <p class="ref-note">English is common in Santa Teresa, less so in the highlands. A little Spanish goes a long way — and "pura vida" covers almost everything. Tap 🔊 to hear a phrase.</p>
             <div class="sub-title">Basics</div>
             <div class="phrase"><span class="ph">¡Pura vida!</span><span class="say">POO-rah VEE-dah</span><span class="en">Hello, goodbye, thanks, all good — the national catchphrase</span></div>
             <div class="phrase"><span class="ph">Buenos días</span><span class="say">BWEH-nohs DEE-ahs</span><span class="en">Good morning</span></div>
@@ -786,18 +857,20 @@
             <div class="phrase"><span class="ph">911</span><span class="say">Police · Ambulance · Fire</span><span class="en">All emergencies anywhere in Costa Rica.</span></div>
             <div class="phrase"><span class="ph">+506 2519-2000</span><span class="say">US Embassy, San José</span><span class="en">Lost passports and emergencies; the same number after hours.</span></div>
             <div class="phrase"><span class="ph">1-800-864-8331</span><span class="say">United Airlines</span><span class="en">Conf JG7BQF.</span></div>
-            <div class="phrase"><span class="ph">1697078634</span><span class="say">National rental</span><span class="en">Counter at the Hilton Garden Inn, Liberia airport, 8 AM–5 PM.</span></div>
+            <div class="phrase"><span class="ph">+506 2242 7878</span><span class="say">National, Liberia</span><span class="en">Hilton Garden Inn counter, 8 AM–5 PM (airport office +506 2242 7889). Conf 1697078634.</span></div>
             <div class="sub-title">Medical</div>
             <div class="phrase"><span class="ph">Santa Teresa</span><span class="say">Santa Teresa Urgent Care</span><span class="en">East side of the Santa Teresa church. 8 AM–11 PM daily, on call 24/7: +506 8512 9111.</span></div>
             <div class="phrase"><span class="ph">Liberia</span><span class="say">Hospital Enrique Baltodano</span><span class="en">Liberia's public hospital, 24-hour emergency room. Private alternatives in Liberia: Hospital San Rafael Arcángel and Hospital Metropolitano.</span></div>
             <div class="sub-title">If there's an accident</div>
             <p class="ref-note">Standard rental-company rule in Costa Rica: don't move the car. Call 911 and National, and wait for the traffic police (tránsito) and the insurance inspector.</p>
             <div class="sub-title">Useful phrases</div>
+            <div data-speak="es-CR">
             <div class="phrase"><span class="ph">¡Ayuda!</span><span class="say">ah-YOO-dah</span><span class="en">Help!</span></div>
             <div class="phrase"><span class="ph">Necesito un médico</span><span class="say">neh-seh-SEE-toh oon MEH-dee-koh</span><span class="en">I need a doctor</span></div>
             <div class="phrase"><span class="ph">Llame a una ambulancia</span><span class="say">YAH-meh ah OO-nah ahm-boo-LAHN-see-ah</span><span class="en">Call an ambulance</span></div>
             <div class="phrase"><span class="ph">Perdí mi pasaporte</span><span class="say">pehr-DEE mee pah-sah-POHR-teh</span><span class="en">I lost my passport</span></div>
             <div class="phrase"><span class="ph">Tuvimos un accidente</span><span class="say">too-VEE-mohs oon ahk-see-DEHN-teh</span><span class="en">We had an accident</span></div>
+            </div>
         </div>
     </div>
 </div>
@@ -807,8 +880,20 @@
     <div class="footer-mark">¡pura vida!</div>
     BRADLEY &amp; ZACH · COSTA RICA · NOVEMBER 2026
     <div class="footer-trips"><a href="index.html">All trips</a> · <a href="sema.html">SEMA</a> · <a href="japan.html">Japan</a></div>
+    <div class="footer-tools"><button type="button" data-print>PRINT OR SAVE AS PDF</button></div>
 </footer>
 
+<script type="application/json" id="trip-events">
+[
+ {"title": "UA 361 Las Vegas → Denver", "start": "20261106T131500Z", "end": "20261106T151400Z", "where": "Harry Reid International Airport, Terminal 3", "note": "Conf JG7BQF. Seat 12F, Economy Plus."},
+ {"title": "UA 1917 Denver → Liberia", "start": "20261106T170000Z", "end": "20261106T221000Z", "where": "Denver International Airport", "note": "Conf JG7BQF. Seat 12A, Economy Plus."},
+ {"title": "Pick up rental car — National (counter shuts 5 PM)", "start": "20261106T223000Z", "end": "20261106T230000Z", "where": "Hilton Garden Inn Liberia Airport", "note": "Conf 1697078634. Counter +506 2242 7878."},
+ {"title": "Airbnb Santa Teresa (Edan)", "allDay": true, "start": "20261106", "end": "20261111", "where": "Playa Santa Teresa, Costa Rica", "note": "Check-in after 3 PM; check-out before 11 AM Nov 11."},
+ {"title": "Airbnb Bagaces (Diego)", "allDay": true, "start": "20261111", "end": "20261113", "where": "Bagaces, Guanacaste, Costa Rica", "note": "Check-in after 3 PM; check-out before 11 AM Nov 13."},
+ {"title": "Return rental car — National", "start": "20261113T210000Z", "end": "20261113T213000Z", "where": "Hilton Garden Inn Liberia Airport", "note": "Booked 4 PM; 3 PM is safer."},
+ {"title": "UA 1446 Liberia → Newark", "start": "20261113T232000Z", "end": "20261114T042500Z", "where": "Daniel Oduber Quirós International Airport (LIR)", "note": "Conf JG7BQF. Check the date change to Nov 13 went through in the United app."}
+]
+</script>
 <script src="assets/trip.js"></script>
 </body>
 </html>
